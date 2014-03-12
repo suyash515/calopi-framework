@@ -1,0 +1,59 @@
+/* 
+Document   : common
+Created on : Dec 11, 2008, 1:36:26 AM
+Author     : suyash
+Description:
+Purpose of the stylesheet follows.
+*/
+
+td.field
+{
+	text-align: right;
+	padding: 5px;
+	color: #000;
+}
+
+input.field
+{
+	width: 200px;
+	height: 15px;
+}
+
+select.field
+{
+	width: 200px;
+	height: 25px;
+}
+
+input.field_date
+{
+	width: 180px;
+	height: 15px;
+}
+
+textarea.field
+{
+	width: 202px;
+	height: 100px;
+}
+
+td.textarea_field
+{
+	vertical-align: top;
+	text-align: right;
+	padding: 5px;
+	color: #000;
+}
+
+input.button
+{
+	color: #000;
+	font-size: 20px;
+	width: 70px;
+	height: 30px;
+}
+
+td.onhover
+{
+	cursor: pointer;
+}

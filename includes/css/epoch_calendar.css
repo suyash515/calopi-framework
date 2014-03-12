@@ -1,0 +1,213 @@
+#header
+{
+	background-color:#CC0000;
+	color:#FFFFFF;
+	font-size:30px;
+	font-weight:bold;
+	height:40px;
+	left:0;
+	margin:0;
+	padding-left:0.25em;
+	top:0;
+	width:100%;
+}
+
+#mainmenu
+{
+	float:left;
+	margin:20px 0 0 5px;
+	width:160px;
+}
+
+#ads
+{
+	clear:left;
+	float:left;
+	margin:20px 0 0 5px;
+	width:160px;
+}
+
+#content
+{
+	margin:20px 30px 30px 190px;
+}
+
+#search
+{
+	clear:both;
+	margin-left:190px;
+	margin-top:2em;
+}
+
+#copyright
+{
+	clear:both;
+	font-size:70%;
+	margin-left:190px;
+	margin-top:2em;
+}
+
+h1.cal
+{
+	background-color:#CC0000;
+	border:1px solid #000000;
+	color:#FFFFFF;
+	font-size:120%;
+	font-weight:bold;
+	padding-left:0.25em;
+}
+
+h2.cal
+{
+	border:1px solid #CC0000;
+	color:#CC0000;
+	font-size:100%;
+	font-weight:normal;
+	padding-left:0.25em;
+}
+
+h3.cal
+{
+	color:#CC0000;
+	font-size:90%;
+	font-style:italic;
+	font-weight:normal;
+}
+
+a.cal:link
+{
+	color:#CC0000;
+	text-decoration:none;
+}
+
+a.cal:visited
+{
+	color:#CC0000;
+	text-decoration:none;
+}
+
+a.cal:active
+{
+	color:#FF0000;
+	text-decoration:none;
+}
+
+a.cal:hover
+{
+	color:#CC0000;
+	text-decoration:underline;
+}
+
+th.cal
+{
+	background-color:#CC0000;
+	color:#FFFFFF;
+	font-weight:bold;
+}
+
+.calendarHeader
+{
+	background-color:#FFFFCC;
+	color:#CC0000;
+	font-weight:bolder;
+	font-size: 15px;
+	height: 30px;
+}
+
+.calendar
+{
+	background-color:#FFFFCC;
+	color: #FF8C00;
+	padding: 3px;
+	font-weight: bold;
+	font-family: verdana;
+	width: 600px;
+	height: 600px;
+}
+
+.calendar_td
+{
+	border-style: solid;
+	border-width: 1px;
+	font-size: 15px;
+	text-align: right;
+	vertical-align: top;
+    width: 10%;
+}
+
+a.calendar_td
+{
+    color: #FF8C00;
+    border: none;
+}
+
+.calendarToday
+{
+	background-color:#FF8C00;
+	color: #FFF;
+	text-align: right;
+	vertical-align: top;
+	font-size: 15px;
+}
+
+a.calendarToday
+{
+    color:inherit;
+}
+
+img.screenshot
+{
+	border:1px solid #000000;
+	margin:10px;
+}
+
+.codeblock
+{
+	background-color:#FFFFFF;
+	border:1px solid #000000;
+	font-family:"Courier New",Courier,mono;
+	font-size:80%;
+	margin:10px;
+	padding:10px;
+	white-space:pre;
+	width:75%;
+}
+
+.sidebar
+{
+	float:right;
+}
+
+dl.cal
+{
+	margin:1em;
+}
+
+dt.cal
+{
+	margin-bottom:1em;
+}
+
+dl.cal
+{
+	margin-bottom:1em;
+}
+
+table.grid 
+{
+	border:1px solid #000000;
+	margin:1em;
+}
+
+table.grid td
+{
+	border:1px solid #000000;
+	margin:0;
+	padding:0.3em;
+}
+
+.disclaimer
+{
+	font-size:larger;
+	font-weight:bold;
+}

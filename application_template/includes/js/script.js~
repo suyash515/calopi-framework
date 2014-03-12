@@ -1,0 +1,1859 @@
+// JavaScript Document
+
+//GLOBAL VARIABLES
+var nav = "nav";
+var calendar_container = "main_container";
+var current_task_container = "current_task_con";
+var right_container = "right_container";
+
+var mode_current = "1";
+var mode_incom = "2";
+var mode_book = "3";
+var mode_recent_stop = "4";
+var mode_recent_finish = "5";
+var mode_suspend = "6";
+
+var searchMode = "1";
+var postponeMode = "1";
+var viewMode = "1";
+var templateMode = "1";
+var shareDesMode = "1";
+var noteMode = "1";
+var attMode = "0";
+var newsMode = "0";
+var infoMode = "0";
+var helpReqMode = "0";
+var feedMode = "0";
+var taskReqMode = "0";
+
+var modeTem = "1";
+var modeTemAddTask = "2";
+var modeTemTslot = "3";
+var templateId = "";
+var modeViewId = "";
+var searchParam = "";
+var shareDesId = "";
+var noteParam = "";
+var attributeId = "";
+var attWorkId = "";
+var friendMode = "";
+var friendId = "";
+var newsIdId = "";
+var profMode = "1";
+var profId = "";
+var infoId = "";
+var actInfoId = "";
+var helpReqId = "";
+var helpReqActId = "";
+var taskReqId = "";
+
+var searchCatParam = "";
+var imageFolder = "";
+
+
+/* ############# */
+/*  application  */
+/* ############# */
+
+function getSettings()
+{
+    if(!loadExternalFile("includes/js/settings.js", "js", "js-settings"))
+    {
+        getSettingsPage();
+    }
+}
+
+function getDiet()
+{
+    if(!loadExternalFile("includes/js/diet.js", "js", "js-diet"))
+    {
+        getDietPage();
+    }
+}
+
+function getHome()
+{
+    if(!loadExternalFile("includes/js/home.js", "js", "js-home"))
+    {
+        getHomePage();
+    }
+}
+
+function getView(mode, viewId)
+{
+    viewMode = mode;
+    modeViewId = viewId;
+
+    if(!loadExternalFile("includes/js/view.js", "js", "js-view"))
+    {
+        if(viewMode == "1")
+        {
+            getViewPage();
+        }
+        else if(viewMode == "2")
+        {
+            loadView(viewId);
+        }
+        else if(viewMode == "3")
+        {
+            saveView();
+        }
+    }
+}
+
+function getFriends(mode, friend)
+{
+    friendMode = mode;
+    friendId = friend;
+
+    if(!loadExternalFile("includes/js/friend.js", "js", "js-friend"))
+    {
+        if(friendMode == "1")
+        {
+            getFriendPage();
+        }
+        else if(friendMode == "2")
+        {
+            acceptFriend(friendId);
+        }
+        else if(friendMode == "3")
+        {
+            rejectFriend(friendId);
+        }
+        else if(friendMode == "4")
+        {
+            requestBrowsedFriend(friendId);
+        }
+        else if(friendMode == "5")
+        {
+            loadMsg();
+        }
+        else if(friendMode == "6")
+        {
+            getFriendFriendsPage(friendId);
+        }
+        else if(friendMode == "7")
+        {
+            remindFriend(friendId);
+        }
+    }
+}
+
+function getHelp()
+{
+    if(!loadExternalFile("includes/js/help.js", "js", "js-help"))
+    {
+        getHelpDisplay();
+    }
+}
+
+function getInfo(mode, id, actId)
+{
+    infoMode = mode;
+    infoId = id;
+    actInfoId = actId;
+
+    if(!loadExternalFile("includes/js/info.js", "js", "js-info"))
+    {
+        if(infoMode == "0")
+        {
+            getInfoDisplay();
+        }
+        else if(infoMode == "1")
+        {
+            getInfoDes(infoId);
+        }
+        else if(infoMode == "2")
+        {
+            getActInfoDes(infoId, actInfoId);
+        }
+        else if(infoMode == "3")
+        {
+            getFriendInfoDisplay(actInfoId);
+        }
+        else if(infoMode == "4")
+        {
+            getFriendInfoDes(infoId, actInfoId);
+        }
+        else if(infoMode == "5")
+        {
+            quickAddInfo();
+        }
+    }
+}
+
+function getHelpRequest(mode, id, actId)
+{
+    helpReqMode = mode;
+    helpReqId = id;
+    helpReqActId = actId;
+
+    if(!loadExternalFile("includes/js/help_request.js", "js", "js-help_request"))
+    {
+        if(helpReqMode == "0")
+        {
+            getHelpRequestDisplay(helpReqId);
+        }
+        else if(helpReqMode == "1")
+        {
+            getActivityAnswerHelpRequest(helpReqActId, helpReqId);
+        }
+        else if(helpReqMode == "2")
+        {
+            reloadActHelpRequest(helpReqActId, helpReqId);
+        }
+    }
+}
+
+function getMainWorkflow()
+{
+    if(!loadExternalFile("includes/js/workflow.js", "js", "js-workflow"))
+    {
+        getWorkflowDisplay();
+    }
+}
+
+function getExport()
+{
+    if(!loadExternalFile("includes/js/export.js", "js", "js-export"))
+    {
+        getExportDisplay();
+    }
+}
+
+function loadProfile(mode, id)
+{
+    profMode = mode;
+    profId = id;
+
+    if(!loadExternalFile("includes/js/profile.js", "js", "js-profile"))
+    {
+        if(profMode == "1")
+        {
+            getProfileDisplay(profId);
+        }
+    }
+}
+
+function loadApps()
+{
+    if(!loadExternalFile("includes/js/application.js", "js", "js-application"))
+    {
+        getUserApp();
+    }
+}
+
+function loadTaskRequest(mode, id)
+{
+    taskReqMode = mode;
+    taskReqId = id;
+
+    if(!loadExternalFile("includes/js/task_request.js", "js", "js-task_request"))
+    {
+        if(taskReqMode == "1")
+        {
+            getTaskRequest();
+        }
+        else if(taskReqMode == "2")
+        {
+            convertTaskRequest(taskReqId);
+        }
+    }
+}
+
+//function getTimetable()
+//{
+//    if(!loadExternalFile("includes/js/timetable.js", "js", "js-timetable"))
+//    {
+//	getTimetableDisplay();
+//    }
+//}
+
+function getAttributes(mode, workId, attId)
+{
+    attMode = mode;
+    attWorkId = workId;
+    attributeId = attId;
+
+    if(!loadExternalFile("includes/js/attribute.js", "js", "js-attribute"))
+    {
+        if(mode == 0)
+        {
+            getAttributeDisplay();
+        }
+        else if(attMode == 1)
+        {
+            updatePerAttWork(attributeId, attWorkId);
+        }
+        else if(mode == 2)
+        {
+            updateEnumAttWork(attributeId, attWorkId);
+        }
+        else if(attMode == 5)
+        {
+            updateCharAttWork(attributeId, attWorkId);
+        }
+        else if(attMode == 6)
+        {
+            updateDateAttWork(attributeId, attWorkId);
+        }
+        else if(attMode == 7)
+        {
+            updateTimeAttWork(attributeId, attWorkId);
+        }
+        else if(attMode == 8)
+        {
+            updateDateTimeAttWork(attributeId, attWorkId);
+        }
+        else if(attMode == 9)
+        {
+            updateNumberAttWork(attributeId, attWorkId);
+        }
+    }
+}
+
+function getForum()
+{
+    if(!loadExternalFile("includes/js/forum.js", "js", "js-forum"))
+    {
+        getForum();
+    }
+}
+
+function getTemplate(mode)
+{
+    templateMode = mode;
+
+    if(!loadExternalFile("includes/js/template.js", "js", "js-template"))
+    {
+        if(templateMode == modeTemTslot)
+        {
+            getTemplateTimeslot();
+        }
+        else
+        {
+            getTemplatePage();
+        }
+    }
+}
+
+function getNews(mode, news)
+{
+    newsMode = mode;
+    newsId = news;
+
+    if(!loadExternalFile("includes/js/news.js", "js", "js-news"))
+    {
+        if(newsMode == '0')
+        {
+            dismissNews(newsId);
+        }
+    }
+}
+
+function loadLinks()
+{
+    if(!loadExternalFile("includes/js/links.js", "js", "js-links"))
+    {
+        getLinksPage();
+    }
+}
+
+function loadShareDescriptor(mode, desId)
+{
+    shareDesMode = mode;
+    shareDesId = desId;
+
+    if(!loadExternalFile("includes/js/des_share.js", "js", "js-des_share"))
+    {
+        if(mode == "1")
+        {
+            getShareDescriptor(desId);
+        }
+        else if(mode == "2")
+        {
+            getSharedDesList();
+        }
+        else if(mode == "3")
+        {
+            getSharedDesDetails(desId);
+        }
+    }
+}
+
+function loadSearch(mode, param)
+{
+    searchMode = mode;
+    searchParam = param;
+
+    if(!loadExternalFile("includes/js/search.js", "js", "js-search"))
+    {
+        if(mode == 1)
+        {
+            search();
+        }
+        else if(mode == 2)
+        {
+            advSearch();
+        }
+        else if(mode == 3)
+        {
+            checkSearch(param);
+        }
+        else if(mode == 4)
+        {
+            spotSearch(param);
+        }
+    }
+}
+
+function loadPostpone(mode)
+{
+    postponeMode = mode;
+
+    if(!loadExternalFile("includes/js/postpone.js", "js", "js-postpone"))
+    {
+        if(mode == 1)
+        {
+            getGenPostpone();
+        }
+        else if(mode == 2)
+        {
+            getAdvPostpone();
+        }
+    }
+}
+
+function loadNotes(mode, param)
+{
+    noteMode = mode;
+    noteParam = param;
+
+    if(!loadExternalFile("includes/js/note.js", "js", "js-note"))
+    {
+        if(mode == 1)
+        {
+            getNoteList(noteParam);
+        }
+    }
+}
+
+function loadSearchCat(param)
+{
+    searchCatParam = param;
+
+    if(!loadExternalFile("includes/js/search_cat.js", "js", "js-searchcat"))
+    {
+        searchCat(searchCatParam);
+    }
+}
+
+function getFeeds(mode)
+{
+    feedMode = mode
+
+    if(!loadExternalFile("includes/js/feeds.js", "js", "js-feeds"))
+    {
+        getFeedsDisplay();
+    }
+}
+
+function initialise()
+{
+}
+
+function changeNav(navToChange)
+{
+//    var childElements = $(nav).childElements();
+//
+//    for(var i=0;i<childElements.length;i++)
+//    {
+//	childElements[i].className = 'a';
+//    }
+//
+//    $(navToChange).className = 'b';
+}
+
+function getSelectedDescriptors()
+{
+    if(document.getElementsByName('des_select') != null)
+    {
+        var catArray = getSelectedCheckboxValue(document.getElementsByName('des_select'));
+    }
+
+    var category = catArray.join("_");
+
+    return category;
+}
+
+function getSelectedSharedDescriptors()
+{
+    if(document.getElementsByName('ch_shared_des') != null)
+    {
+        var catArray = getSelectedCheckboxValue(document.getElementsByName('ch_shared_des'));
+    }
+
+    var category = catArray.join("_");
+
+    return category;
+}
+
+function saveNewDescriptor()
+{
+    var title = $F('txt_title');
+    var description = $F('txt_description');
+    var parentDescriptorId = "";
+
+    if(document.getElementsByName('des_select') != null)
+    {
+        parentDescriptorId = getSelectedRadio(document.getElementsByName('des_select'));
+    }
+
+    var params = "title=" + e(title) + "&description=" + e(description) + "&parent_id=" + e(parentDescriptorId);
+
+    getSSContent('td_add_des_error', "saveNewDescriptor", params);
+}
+
+function clearAddDes()
+{
+    getSSContent('td_add_des_error', 'clearAddDes', '');
+}
+
+function reloadAddDesList()
+{
+    getSSContent("add_des_parent_list", "reloadAddDesList", "");
+}
+
+function toggleAction(imageId)
+{
+    if($(imageId).src.indexOf("collapse") != -1)
+    {
+        $(imageId).src = expand;
+    }
+    else
+    {
+        $(imageId).src = collapse;
+    }
+}
+
+function toggleDescriptorTreeItem(descriptorId, hiddenElement)
+{
+    if($(hiddenElement).visible())
+    {
+        $(hiddenElement).hide();
+    }
+    else
+    {
+        $(hiddenElement).show();
+
+        if($(hiddenElement).innerHTML == "")
+        {
+            var params = "parent_id=" + descriptorId;
+
+            getSSContent(hiddenElement, "getChildDescriptors", params);
+        }
+    }
+}
+
+function toggleDescriptorTreeItemWithAction(descriptorId, hiddenElement, action)
+{
+    if($(hiddenElement).visible())
+    {
+        $(hiddenElement).hide();
+    }
+    else
+    {
+        $(hiddenElement).show();
+
+        if($(hiddenElement).innerHTML == "")
+        {
+            var params = "parent_id=" + descriptorId + "&des_action=" + action;
+            getSSContent(hiddenElement, "getChildDescriptorsWithAction", params);
+        }
+    }
+}
+
+function toggleActionDescriptorTreeItem(descriptorId, hiddenElement)
+{
+    if($(hiddenElement).visible())
+    {
+        $(hiddenElement).hide();
+    }
+    else
+    {
+        $(hiddenElement).show();
+
+        if($(hiddenElement).innerHTML == "")
+        {
+            var params = "parent_id=" + descriptorId;
+            getSSContent(hiddenElement, "getActionChildDescriptors", params);
+        }
+    }
+}
+
+function toggleSingleSelectDescriptorTreeItem(descriptorId, hiddenElement)
+{
+    if($(hiddenElement).visible())
+    {
+        $(hiddenElement).hide();
+    }
+    else
+    {
+        $(hiddenElement).show();
+
+        if($(hiddenElement).innerHTML == "")
+        {
+            var params = "parent_id=" + descriptorId;
+            getSSContent(hiddenElement, "getSingleSelectChildDescriptors", params);
+        }
+    }
+
+    Modalbox.resizeToContent();
+}
+
+function toggleMultipleSelectDescriptorTreeItem(descriptorId, hiddenElement)
+{
+    if($(hiddenElement).visible())
+    {
+        $(hiddenElement).hide();
+    }
+    else
+    {
+        $(hiddenElement).show();
+
+        if($(hiddenElement).innerHTML == "")
+        {
+            var params = "parent_id=" + descriptorId;
+            getSSContent(hiddenElement, "getMultipleSelectChildDescriptors", params);
+        }
+    }
+}
+
+function toggleMultiplePreSelectDescriptorTreeItem(descriptorId, workId, hiddenElement)
+{
+    if($(hiddenElement).visible())
+    {
+        $(hiddenElement).hide();
+    }
+    else
+    {
+        var icon = "icon_" + descriptorId;
+
+        if($(icon))
+        {
+            //	    $(icon).src = "./images/collapse.png";
+            $(icon).src = imageFolder + "collapse.png";
+        }
+
+        $(hiddenElement).show();
+
+        if($(hiddenElement).innerHTML == "")
+        {
+            var params = "parent_id=" + descriptorId + "&work_id=" + workId;
+            getSSContent(hiddenElement, "getMultiplePreSelectChildDescriptors", params);
+        }
+    }
+
+    Modalbox.resizeToContent();
+}
+
+function toggleMultiplePreSelectDescriptorTreeItemFromDescriptorList(descriptorId, desId, hiddenElement)
+{
+    if($(hiddenElement).visible())
+    {
+        $(hiddenElement).hide();
+    }
+    else
+    {
+        var icon = "icon_" + descriptorId;
+
+        if($(icon))
+        {
+            //	    $(icon).src = "./images/collapse.png";
+            $(icon).src = imageFolder + "collapse.png";
+        }
+
+        $(hiddenElement).show();
+
+        if($(hiddenElement).innerHTML == "")
+        {
+            var params = "parent_id=" + descriptorId + "&des_id=" + desId;
+            getSSContent(hiddenElement, "getMultiplePreSelectChildDescriptorsFromDescriptorList", params);
+        }
+    }
+
+    Modalbox.resizeToContent();
+}
+
+function toggleSinglePreSelectDescriptorTreeItem(descriptorId, selDesId, hiddenElement)
+{
+    if($(hiddenElement).visible())
+    {
+        $(hiddenElement).hide();
+    }
+    else
+    {
+        $(hiddenElement).show();
+
+        if($(hiddenElement).innerHTML == "")
+        {
+            var params = "des_id=" + descriptorId + "&sel_des_id=" + selDesId;
+            getSSContent(hiddenElement, "getSinglePreSelectChildDescriptors", params);
+        }
+    }
+
+    Modalbox.resizeToContent();
+}
+
+function showNextMonth(currentMonth, currentYear)
+{
+    var params = "current_month=" + currentMonth + "&current_year=" + currentYear;
+
+    getSSContent(calendar_container, "showNextMonth", params);
+}
+
+function showPreviousMonth(currentMonth, currentYear)
+{
+    var params = "current_month=" + currentMonth + "&current_year=" + currentYear;
+
+    getSSContent(calendar_container, "showPreviousMonth", params);
+}
+
+function saveNewTask()
+{
+    var title = $F('txt_task_title');
+    var description = $F('txt_task_des');
+    var start = $F('txt_task_start');
+    var end = $F('txt_task_end');
+
+    //retrieve category list
+    if(document.getElementsByName('des_select') != null)
+    {
+        var catArray = getSelectedCheckboxValue(document.getElementsByName('des_select'));
+    }
+
+    if(document.getElementsByName('select_most_des_parent') != null)
+    {
+        var mostUsed = getSelectedCheckboxValue(document.getElementsByName('used_des_select'));
+    }
+
+    if(document.getElementsByName('des_shared_list') != null)
+    {
+        var shared = getSelectedCheckboxValue(document.getElementsByName('shared_des_select'));
+    }
+
+    if(document.getElementsByName('des_search_select') != null)
+    {
+        var search = getSelectedCheckboxValue(document.getElementsByName('des_search_select'));
+    }
+
+    for(var i=0;i<mostUsed.length;i++)
+    {
+        if(catArray.indexOf(mostUsed[i]) == -1)
+        {
+            catArray.push(mostUsed[i]);
+        }
+    }
+
+    for(var i=0;i<shared.length;i++)
+    {
+        if(catArray.indexOf(shared[i]) == -1)
+        {
+            catArray.push(shared[i]);
+        }
+    }
+
+    for(var i=0;i<search.length;i++)
+    {
+        if(catArray.indexOf(search[i]) == -1)
+        {
+            catArray.push(search[i]);
+        }
+    }
+
+    var category = catArray.join("_");
+    //end retrieve category list
+
+    var params = "title=" + e(title) + "&description=" + e(description) + "&start=" + e(start) + "&end=" + e(end) + "&category=" + e(category);
+    getSSContent("div_task_add_err", "saveNewTask", params);
+}
+
+function startWork(workId, container)
+{
+    var params = "work_id=" + workId + "&container=" + container;
+    getSSContent(container, "startWork", params);
+}
+
+function checkStartWork(workId, container)
+{
+    var params = "work_id=" + workId + "&container=" + container;
+    getSSContent(container, "checkStartWork", params);
+}
+
+function finishWork(workId, container)
+{
+    var params = "work_id=" + workId + "&container=" + container;
+    getSSContent(container, "finishWork", params);
+}
+
+function reOpenWork(workId, container)
+{
+    var params = "work_id=" + workId + "&container=" + container;
+    getSSContent(container, "reOpenWork", params);
+}
+
+function stopWork(workId, container)
+{
+    var params = "work_id=" + workId + "&container=" + container;
+    getSSContent(container, "stopWork", params);
+}
+
+function suspendWork(workId, container)
+{
+    var params = "work_id=" + workId + "&container=" + container;
+    getSSContent(container, "suspendWork", params);
+}
+
+function toggleSuspendTask(workId)
+{
+    var con = "sus_task_con_" + workId;
+    var ch = "ch_sus_task_" + workId;
+    var val = $F(ch);
+    var params = "work_id=" + workId + "&suspended=" + val;
+    $(con).show();
+    getSSContent(con, "toggleSuspendTask", params);
+}
+
+function toggleBookmarkTask(workId)
+{
+    var con = "book_task_con_" + workId;
+    var ch = "ch_book_task_" + workId;
+    var val = $F(ch);
+    var params = "work_id=" + workId + "&bookmark=" + val;
+    $(con).show();
+    getSSContent(con, "toggleBookmarkTask", params);
+}
+
+function updateStatusDisplay(workId)
+{
+    var container = "work_status_" + workId;
+    if($(container))
+    {
+        var params = "work_id=" + workId + "&container=" + container;
+        getSSContent(container, "reloadStatusDisplay", params);
+    }
+}
+
+function getWorkStatusDisplay(workId, statusId, container)
+{
+    if($(container))
+    {
+        var params = "work_id=" + workId + "&status_id=" + statusId + "&container=" + container;
+        getSSContent(container, "getWorkStatusDisplay", params);
+    }
+}
+
+function getStatusTasks(comboId)
+{
+    var status = $(comboId).options[$(comboId).selectedIndex].value;
+    var params = "status_id=" + status;
+
+    if($('div_task_list'))
+    {
+        getSSContent("div_task_list", "getStatusTasks", params);
+    }
+}
+
+function updateLogList(workId)
+{
+    var container = "log_list_" + workId;
+
+    if(($(container)) && ($(container).innerHTML != '') && ($(container).visible()))
+    {
+        getWorkActLog(workId, container);
+    }
+}
+
+function getWorkActLog(workId)
+{
+    var container = "log_list_" + workId;
+    var params = "work_id=" + workId;
+    getSSContent(container, "getWorkActLog", params);
+}
+
+function deleteActLog(workId, startDate, endDate, container)
+{
+    var params = "work_id=" + workId + "&start_date=" + startDate + "&end_date=" + endDate + "&container=" + container;
+    getSSContent(container, "deleteActLog", params);
+}
+
+function getAddActLog(workId)
+{
+    var con = "add_act_log_" + workId;
+    var params = "work_id=" + workId;
+    getSSContent(con, "getAddActLog", params);
+}
+
+function addWorkActLog(workId)
+{
+    var con = "add_act_log_con_" + workId;
+    var start = $F('txt_work_log_start');
+    var end = $F('txt_work_log_end');
+    var params = "work_id=" + workId + "&start=" + start + "&end=" + end;
+    getSSContent(con, "addWorkActLog", params);
+}
+
+function clearAddWorkActLog(workId)
+{
+    var con = "add_act_log_con_" + workId;
+    var params = "work_id=" + workId;
+    getSSContent(con, "clearAddWorkActLog", params);
+}
+
+function saveWorkActLog(workId, start, end)
+{
+    var container = "add_act_log_con_" + workId;
+    var params = "work_id=" + workId + "&start=" + start + "&end=" + end;
+    getSSContent(container, 'saveWorkActLog', params);
+}
+
+function reloadTaskList(date, month, year)
+{
+    var status = $('cbo_status').options[$('cbo_status').selectedIndex].value;
+    var params = "date=" + date + "&month=" + month + "&year=" + year + "&status=" + status;
+    getSSContent("div_task_list", "getTaskList", params);
+}
+
+function reloadTaskByDateField(status)
+{
+    if($('hid_search_mode') != null)
+    {
+        refreshAdvSearch();
+    }
+    else
+    {
+        var st = status;
+
+        if($('cbo_status'))
+        {
+            st = $('cbo_status').options[$('cbo_status').selectedIndex].value;
+        }
+
+        if($('hid_nav_cal_current') != null)
+        {
+            if($('div_task_list') != null)
+            {
+                var date = $('hid_nav_cal_current').value;
+                var params = "date=" + date + "&status=" + st;
+                getSSContent('div_task_list', 'reloadTaskByDateField', params);
+            }
+        }
+    }
+}
+
+function updateIndTask(workId)
+{
+    var con = "ind_work_con_id_" + workId;
+
+    if(con)
+    {
+        var params = "work_id=" + workId;
+        getSSContent(con, "reloadIndTask", params);
+    }
+}
+
+function editTask(taskId, taskClass)
+{
+    var title = $F('txt_task_title');
+    var description = $F('txt_task_des');
+    var start = $F('txt_task_start');
+    var end = $F('txt_task_end');
+    var category = getSelectedDescriptors();
+
+    var params = "title=" + e(title) + "&description=" + e(description) + "&start=" + start + "&end=" + end + "&category=" + category + "&task_class=" + taskClass + "&task_id=" + taskId;
+
+    getSSContent("div_task_edit_err", "editTask", params);
+}
+
+function editSharedTask(taskId, taskClass)
+{
+    var title = $F('txt_task_title');
+    var start = $F('txt_task_start');
+    var end = $F('txt_task_end');
+
+    var params = "title=" + e(title) + "&start=" + start + "&end=" + end + "&task_class=" + taskClass + "&task_id=" + taskId;
+
+    getSSContent("div_task_edit_err", "editSharedTask", params);
+}
+
+function getEditDescriptor(descriptorId)
+{
+    var params = "descriptor_id=" + descriptorId;
+
+    getSSContent("action_des", "getEditDescriptor", params);
+}
+
+function toggleEditDesParent(descriptorId, editDescriptorId, parentId, hiddenTdId)
+{
+    if($(hiddenTdId).visible())
+    {
+        $(hiddenTdId).hide();
+    }
+    else
+    {
+        $(hiddenTdId).show();
+
+        if($(hiddenTdId).innerHTML == "")
+        {
+            var params = "descriptor_id=" + descriptorId + "&parent_id=" + parentId + "&edit_descriptor_id=" + editDescriptorId;
+
+            getSSContent(hiddenTdId, "getEditDesParentSubTree", params);
+        }
+    }
+
+    Modalbox.resizeToContent();
+}
+
+function editDescriptor(descriptorId)
+{
+    var title = $F('txt_title');
+    var description = $F('txt_description');
+    var isDefault = "";
+    var parentDescriptorId = "";
+
+    if($('ch_default'))
+    {
+        isDefault = $F('ch_default');
+    }
+
+    if(document.getElementsByName('des_edit_select') != null)
+    {
+        parentDescriptorId = getSelectedRadio(document.getElementsByName('des_edit_select'));
+    }
+
+    var params = "title=" + e(title) + "&description=" + e(description) + "&parent_id=" + parentDescriptorId + "&descriptor_id=" + descriptorId + "&is_default=" + isDefault;
+
+    getSSContent('td_edit_des_error', "editDescriptor", params);
+}
+
+function reloadDescriptorActionTree(element)
+{
+    getSSContent("act_des_tree", "reloadDescriptorActionTree", "");
+}
+
+function getDeleteDescriptor(descriptorId)
+{
+    var params = "descriptor_id=" + descriptorId;
+    getSSContent("action_des", "getDeleteDescriptor", params);
+}
+
+function deleteDescriptor(descriptorId)
+{
+    var params = "descriptor_id=" + descriptorId;
+    getSSContent('td_del_des_error', "deleteDescriptor", params);
+}
+
+function findLinkableTasks(workId)
+{
+    var start = $F('txt_link_start');
+    var end = $F('txt_link_end');
+
+    var params = "start=" + start + "&end=" + end + "&work_id=" + workId;
+    getSSContent('td_linkable_tasks', "findLinkableTasks", params);
+}
+
+function findEditLinkableTasks(workId)
+{
+    var start = $F('txt_link_start');
+    var end = $F('txt_link_end');
+
+    var params = "start=" + start + "&end=" + end + "&work_id=" + workId;
+    getSSContent('td_linkable_tasks', "findEditLinkableTasks", params);
+}
+
+function getLinkWorkList(workId)
+{
+    var params = "work_id=" + workId;
+    getSSContent("div_add_task", "getLinkWorkList", params);
+}
+
+function getEditLinkWorkList(workId)
+{
+    var params = "work_id=" + workId;
+    getSSContent("div_add_task", "getEditLinkWorkList", params);
+}
+
+function toggleLink(workId, linkWorkId)
+{
+    var cboId = "cbo_link_" + linkWorkId;
+    var linkType = $(cboId).options[$(cboId).selectedIndex].value;
+
+    var params = "work_id=" + workId + "&link_work_id=" + linkWorkId + "&link_type=" + linkType;
+    getSSContent("link_proc", "toggleLink", params);
+}
+
+function editToggleLink(workId, linkWorkId)
+{
+    var cboId = "cbo_link_" + linkWorkId;
+    var linkType = $(cboId).options[$(cboId).selectedIndex].value;
+    var container = "con_list_" + linkType;
+    var params = "work_id=" + workId + "&link_work_id=" + linkWorkId + "&link_type=" + linkType;
+
+    getSSContent(container, "editToggleLink", params);
+}
+
+function rollDayBack(days, status)
+{
+    if($('cbo_status'))
+    {
+        status = $('cbo_status').options[$('cbo_status').selectedIndex].value;
+    }
+
+    var date = $F('hid_nav_cal_current');
+
+    var params = "date=" + date + "&days=" + days + "&status=" + status;
+    getSSContent("div_task_list", "rollDayBack", params);
+}
+
+function rollDayForw(days, status)
+{
+    if($('cbo_status'))
+    {
+        status = $('cbo_status').options[$('cbo_status').selectedIndex].value;
+    }
+
+    var date = $F('hid_nav_cal_current');
+
+    var params = "date=" + date + "&days=" + days + "&status=" + status;
+    getSSContent("div_task_list", "rollDayForw", params);
+}
+
+//function rollDayBack(status)
+//{
+//    var date = $F('hid_nav_cal_prev_day');
+//    calNav(date, status);
+//}
+//
+//function rollWeekBack(status)
+//{
+//    var date = $F('hid_nav_cal_prev_week');
+//    calNav(date, status);
+//}
+//
+//function rollMonthBack(status)
+//{
+//    var date = $F('hid_nav_cal_prev_month');
+//    calNav(date, status);
+//}
+//
+//function rollDayForw(status)
+//{
+//    var date = $F('hid_nav_cal_next_day');
+//    calNav(date, status);
+//}
+//
+//function rollWeekForw(status)
+//{
+//    var date = $F('hid_nav_cal_next_week');
+//    calNav(date, status);
+//}
+//
+//function rollMonthForw(status)
+//{
+//    var date = $F('hid_nav_cal_next_month');
+//    calNav(date, status);
+//}
+
+function calNav(date, status)
+{
+    if($('cbo_status'))
+    {
+        status = $('cbo_status').options[$('cbo_status').selectedIndex].value;
+    }
+
+    var params = "date=" + date + "&status=" + status;
+    getSSContent("div_task_list", "reloadTaskByDateField", params);
+}
+
+function getDayView(date, status)
+{
+    if($('cbo_status'))
+    {
+        status = $('cbo_status').options[$('cbo_status').selectedIndex].value;
+    }
+
+    var params = "date=" + date + "&status=" + status;
+    getSSContent("cal_update_con", "getDayView", params);
+}
+
+function getCalendar(date, status)
+{
+    getMainDayView(date, status);
+    getCalendarBar(date, status);
+}
+
+function getMainDayView(date, status)
+{
+    if($('cbo_status'))
+    {
+        status = $('cbo_status').options[$('cbo_status').selectedIndex].value;
+    }
+
+    var params = "date=" + date + "&status=" + status;
+    getSSContent(calendar_container, "getMainDayView", params);
+}
+
+function getCalendarBar(date, status)
+{
+    if($('cbo_status'))
+    {
+        status = $('cbo_status').options[$('cbo_status').selectedIndex].value;
+    }
+
+    var params = "date=" + date + "&status=" + status;
+    getSSContent(right_container, "getCalendarBar", params);
+}
+
+function reloadCalendar()
+{
+    if($('txt_date'))
+    {
+        var date = $F('txt_date');
+        var status = "";
+
+        if($('cbo_status'))
+        {
+            status = $('cbo_status').options[$('cbo_status').selectedIndex].value;
+        }
+
+        var params = "date=" + date + "&status=" + status;
+        getSSContent(calendar_container, "reloadCalendar", params);
+    }
+}
+
+function updateRapidTaskList()
+{
+    var mode = $F('txt_rapid_task_type');
+
+    if(mode == mode_current)
+    {
+        getCurrentTasksList();
+    }
+    else if(mode == mode_recent_stop)
+    {
+        getRecentStoppedTasks();
+    }
+    else if(mode == mode_incom)
+    {
+        getIncomTasks();
+    }
+    else if(mode == mode_book)
+    {
+        getBookTasks();
+    }
+    else if(mode == mode_recent_finish)
+    {
+        getRecentFinishedTasks();
+    }
+    else if(mode == mode_suspend)
+    {
+        getSuspendTasks();
+    }
+}
+
+function getCurrentTasksList()
+{
+    getSSContent(calendar_container, "getCurrentTasksList", "");
+//    $('txt_rapid_task_type').value = mode_current;
+}
+
+function getRecentStoppedTasks()
+{
+    getSSContent(calendar_container, "getRecentStoppedTasks", "");
+//    $('txt_rapid_task_type').value = mode_recent_stop;
+}
+
+function getIncomTasks()
+{
+    getSSContent(calendar_container, "getIncomTasks", "");
+}
+
+function loadFriendIncomTask()
+{
+    loadToggle("friend_incom_task_con", "loadFriendIncomTask", "");
+}
+
+function getBookTasks()
+{
+    getSSContent(calendar_container, "getBookTasks", "");
+//    $('txt_rapid_task_type').value = mode_book;
+}
+
+function getRecentFinishedTasks()
+{
+    getSSContent(calendar_container, "getRecentFinishedTasks", "");
+//    $('txt_rapid_task_type').value = mode_recent_finish;
+}
+
+function getSuspendTasks()
+{
+    getSSContent(calendar_container, "getSuspendTasks", "");
+//    $('txt_rapid_task_type').value = mode_suspend;
+}
+
+function setCalendarDate()
+{
+    var status = $('cbo_status').options[$('cbo_status').selectedIndex].value;
+    var date = $("txt_cal_date").value;
+    var params = "date=" + date + "&status=" + status;
+    getSSContent("div_task_list", "setCalendarDate", params);
+}
+
+function deleteWork(workId)
+{
+    var params = "work_id=" + workId;
+    getSSContent("com_del_work", "deleteWork", params);
+}
+
+function deleteAllWork()
+{
+    var params = "status=" + status;
+    getSSContent(calendar_container, "deleteAllWork", params);
+}
+
+function removeLinkedWork(workId, linkWorkId, linkType, cont)
+{
+    var params = "work_id=" + workId + "&link_work_id=" + linkWorkId + "&link_type=" + linkType;
+    getSSContent(cont, "removeLinkedWork", params);
+
+    if($('div_add_task').innerHTML != "")
+    {
+        if($('td_linkable_tasks').innerHTML != "")
+        {
+            findEditLinkableTasks(workId);
+        }
+    }
+}
+
+function genTimeWorkAnalysis()
+{
+    var start = $F("txt_time_work_start");
+    var end = $F("txt_time_work_end");
+
+    var category = getSelectedDescriptors();
+    var sharedCategory = getSelectedSharedDescriptors();
+
+    var params = "descriptor_id=" + category + "&shared_des_id=" + sharedCategory + "&start=" + start + "&end=" + end;
+    getSSContent("time_worked_ana_con", "genTimeWorkedAnalysis", params);
+}
+
+function bookmarkWork(workId)
+{
+    var con = "book_work_" + workId;
+    var check = "check_work_" + workId;
+    var mark = $(check).checked;
+    var params = "work_id=" + workId + "&mark=" + mark;
+
+    getSSContent(con, "bookmarkWork", params);
+}
+
+function getWorkDes(workId)
+{
+    var con = "day_view_work_des_" + workId;
+
+    if($(con).visible())
+    {
+        $(con).hide();
+    }
+    else
+    {
+        showWorkDes(con, workId);
+    }
+}
+
+function showWorkDes(con, workId)
+{
+    $(con).show();
+    var params = "work_id=" + workId;
+    getSSContent(con, "getWorkDes", params);
+}
+
+function getPrevSlot(startCon, endCon, proCon)
+{
+    var start = $(startCon).value;
+    var end = $(endCon).value;
+
+    if(start == "" || end == "")
+    {
+        alert("You must enter a value for start and end dates");
+    }
+    else
+    {
+        var params = "start=" + start + "&end=" + end + "&start_con=" + startCon + "&end_con=" + endCon;
+        getSSContent(proCon, "getPrevSlot", params);
+    }
+}
+
+function getNextSlot(startCon, endCon, proCon)
+{
+    var start = $(startCon).value;
+    var end = $(endCon).value;
+
+    if(start == "" || end == "")
+    {
+        alert("You must enter a value for start and end dates");
+    }
+    else
+    {
+        var params = "start=" + start + "&end=" + end + "&start_con=" + startCon + "&end_con=" + endCon;
+        getSSContent(proCon, "getNextSlot", params);
+    }
+}
+
+function autoDate(start, end, conToChange)
+{
+    var newStart = $F('txt_task_start');
+    var params = "start=" + start + "&end=" + end + "&new_start=" + newStart + "&container=" + conToChange;
+    getSSContent("add_task_auto_date", "autoDate", params);
+}
+
+function getEditDesc(workId)
+{
+    var con = "edit_desc_con_pro_" + workId;
+    var params = "work_id=" + workId;
+    getSSContent(con, "getEditDesc", params);
+}
+
+function editWorkDesc(workId)
+{
+    var con = "pro_des_con_" + workId;
+    var txtDes = "text_des_" + workId;
+    var des = $F(txtDes);
+    var params = "work_id=" + workId + "&des=" + e(des);
+    getSSContent(con, "editWorkDesc", params);
+}
+
+function reloadDescInd(workId)
+{
+    var con = "work_des_ind_" + workId;
+
+    if($(con) != null)
+    {
+        var params = "work_id=" + workId;
+        getSSContent(con, "reloadDescInd", params);
+    }
+}
+
+function copyWork(workId)
+{
+    var con = "copy_work_con_" + workId;
+    var params = "work_id=" + workId;
+    getSSContent(con, "copyWork", params);
+}
+
+function getMostUsedDes()
+{
+    var con = "most_used_des_con";
+
+    if(!$(con).visible())
+    {
+        $(con).show();
+
+        if($(con).innerHTML == '')
+        {
+            getSSContent(con, "getMostUsedDes", "");
+        }
+    }
+    else
+    {
+        $(con).hide();
+    }
+}
+
+function getComment(section, con)
+{
+    $(con).show();
+    var params = "section=" + section + "&con=" + con;
+    getSSContent(con, "getComment", params);
+}
+
+function sendComment(section, con)
+{
+    var comment = $F('txt_comment');
+    var params = "comment=" + e(comment) + "&section=" + e(section);
+    getSSContent(con, "sendComment", params);
+}
+
+function getAddFoodWork(workId)
+{
+    var params = "work_id=" + workId;
+    getSSContent("add_food_work", "getAddFoodWork", params);
+}
+
+function saveFoodWork(workId)
+{
+    var foodId = $('cbo_task_food').options[$('cbo_task_food').selectedIndex].value;
+    var qty = $F('txt_qty_food');
+    var params = "work_id=" + e(workId) + "&food_id=" + e(foodId) + "&qty=" + e(qty);
+
+    getSSContent("add_food_work_con", "saveFoodWork", params);
+}
+
+function clearFoodWork()
+{
+    getSSContent("add_food_work_con", "clearFoodWork", "");
+}
+
+function getFoodWorkList(workId)
+{
+    var params = "work_id=" + workId;
+    getSSContent("food_work_list", "getFoodWorkList", params);
+}
+
+function relAddTaskTemList(temId)
+{
+    templateMode = modeTemAddTask;
+    templateId = temId;
+
+    if(!loadExternalFile("includes/js/template.js", "js", "js-template"))
+    {
+        reloadAddTaskTemList(temId);
+    }
+}
+
+function toggleMoreOptions(con, imageCon, image1, image2)
+{
+    if($(con).visible())
+    {
+        Effect.Fade(con);
+        $(imageCon).setAttribute('src', image1);
+        getSSContent("more_opt_save_con", "disableMoreOptions", "");
+    }
+    else
+    {
+        Effect.Appear(con);
+        $(imageCon).setAttribute('src', image2);
+        getSSContent("more_opt_save_con", "enableMoreOptions", "");
+    }
+}
+
+function highlightOpacity(con)
+{
+    $(con).setStyle({
+        opacity: 1.0
+    });
+}
+
+function unhighlightOpacity(con)
+{
+    $(con).setStyle({
+        opacity: 0.5
+    });
+}
+
+function getTools()
+{
+    getSSContent(calendar_container, "getTools", "");
+}
+
+function getQuickTaskCat()
+{
+    if($('quick_add_task_cat_con').innerHTML == '')
+    {
+        getSSContent('quick_add_task_cat_con', 'getQuickTaskCat', '');
+    }
+
+    $('quick_add_task_cat_con').show();
+}
+
+function addQuickTask()
+{
+    var title = $F('txt_add_quick_task');
+    var mostUsed = getSelectedCheckboxValue(document.getElementsByName('quick_used_des_select'));
+    var cat = mostUsed.join("_");
+
+    var params = "title=" + title + "&cat=" + cat;
+    getSSContent('quick_add_task_pro', 'addQuickTask', params);
+}
+
+function autoTaskCat()
+{
+    return "text=" + $F('txt_add_quick_cat') + "&cat=" + $F('cat_list_auto_result');
+}
+
+function resultTaskCat(element)
+{
+    $('txt_add_quick_cat').value = element.innerHTML.unescapeHTML();
+    var id = element.childElements()[0].value;
+    $('cat_list_auto_result').value = $('cat_list_auto_result').value + "_" + id;
+
+    var conId = "con_cat_auto_" + id;
+
+    if($('con_new_task_cat_des').innerHTML == "")
+    {
+        //	$('con_new_task_cat_des').innerHTML = "<span id='" + conId + "'>" + element.innerHTML.unescapeHTML() +
+        //	"<img src='./images/auto_del_cat.png' onclick=\"removeAutoCat('" + id + "');\"></span>";
+        $('con_new_task_cat_des').innerHTML = "<span id='" + conId + "'>" + element.innerHTML.unescapeHTML() +
+        "<img src='" + imageFolder + "auto_del_cat.png' onclick=\"removeAutoCat('" + id + "');\"></span>";
+    }
+    else
+    {
+        //	$('con_new_task_cat_des').innerHTML = $('con_new_task_cat_des').innerHTML + "<span id='" + conId + "'>, " + element.innerHTML.unescapeHTML() +
+        //	"<img src='./images/auto_del_cat.png' onclick=\"removeAutoCat('" + id + "');\"></span>";
+        $('con_new_task_cat_des').innerHTML = $('con_new_task_cat_des').innerHTML + "<span id='" + conId + "'>, " + element.innerHTML.unescapeHTML() +
+        "<img src='" + imageFolder + "auto_del_cat.png' onclick=\"removeAutoCat('" + id + "');\"></span>";
+    }
+
+    $('txt_add_quick_cat').value = "";
+
+    new Effect.Highlight($('con_new_task_cat_des'), {
+        startcolor: '#7FFF00',
+        endcolor: '#555555'
+    });
+}
+
+function removeAutoCat(id)
+{
+    var conId = "con_cat_auto_" + id;
+    $(conId).hide();
+
+    var idList = $('cat_list_auto_result').value;
+    var index = idList.indexOf("_" + id + "_");
+    var text = idList.substr(0, index) + "_" + idList.substr(index + 3, idList.length);
+    $('cat_list_auto_result').value = text;
+}
+
+function parseQuickAdd()
+{
+    var text = $F('txt_add_quick_task');
+    var date = $F('hid_nav_cal_current');
+    var params = "text=" + text + "&date=" + date;
+    $('con_new_task_des').show();
+    getSSContent("con_new_quick_task_des", "parseQuickAdd", params);
+}
+
+function getAddQuickTaskCat()
+{
+    parseQuickAdd();
+    $('quick_add_task_cat').show();
+
+    if($("quick_add_task_cat").innerHTML == "")
+    {
+        getSSContent("quick_add_task_cat", "getAddQuickTaskCat", "");
+    }
+    else
+    {
+        clearCatSelection();
+
+        var params = "cat=" + $F("txt_check_cat_same_con");
+        getSSContent("check_cat_same_con", "checkSameCat", params);
+    }
+}
+
+function clearCatSelection()
+{
+    var catEl = document.getElementsByName("des_select");
+    var catUsed = document.getElementsByName("used_des_select");
+    var catRecent = document.getElementsByName("recent_des_select");
+
+    for(var i=0;i<catEl.length;i++)
+    {
+        catEl[i].checked = false;
+    }
+
+    for(var i=0;i<catUsed.length;i++)
+    {
+        catUsed[i].checked = false;
+    }
+
+    for(var i=0;i<catRecent.length;i++)
+    {
+        catRecent[i].checked = false;
+    }
+}
+
+function getAddQuickHomeTask()
+{
+    parseQuickAdd();
+    $('quick_add_task_cat').show();
+    getSSContent("quick_add_task_cat", "getAddQuickHomeTask", "");
+}
+
+function addCalQuickTask(type)
+{
+    var text = $F('txt_add_quick_task');
+    var date = $F('hid_nav_cal_current');
+
+    //retrieve category list
+    if(document.getElementsByName('des_select') != null)
+    {
+        var catArray = getSelectedCheckboxValue(document.getElementsByName('des_select'));
+    }
+
+    if(document.getElementsByName('select_most_des_parent') != null)
+    {
+        var mostUsed = getSelectedCheckboxValue(document.getElementsByName('used_des_select'));
+    }
+
+    if(document.getElementsByName('select_rec_des_parent') != null)
+    {
+        var recentUsed = getSelectedCheckboxValue(document.getElementsByName('recent_des_select'));
+    }
+
+    for(var i=0;i<mostUsed.length;i++)
+    {
+        if(catArray.indexOf(mostUsed[i]) == -1)
+        {
+            catArray.push(mostUsed[i]);
+        }
+    }
+
+    for(var i=0;i<recentUsed.length;i++)
+    {
+        if(catArray.indexOf(recentUsed[i]) == -1)
+        {
+            catArray.push(recentUsed[i]);
+        }
+    }
+
+    var cat = catArray.join("_");
+    //end retrieve category list
+
+    var params = "text=" + text + "&date=" + date + "&cat=" + cat + "&type=" + type;
+    getSSContent("con_new_task_pro", "addCalQuickTask", params);
+}
+
+function clearQuickAdd()
+{
+    getSSContent("con_new_quick_task_des", "clearQuickAdd", "");
+}
+
+function toggleQuickTask()
+{
+    if($('add_quick_task_table_con').visible())
+    {
+        getSSContent("tog_quick_task_save_con", "disableQuickTask", "");
+    }
+    else
+    {
+        getSSContent("tog_quick_task_save_con", "enableQuickTask", "");
+    }
+
+    Effect.toggle('add_quick_task_table_con');
+}
+
+function getDescriptorPage()
+{
+    getDescriptorList();
+    getDescriptorMain();
+}
+
+function getDescriptorList()
+{
+    getSSContent(right_container, 'getDescriptorList', '');
+}
+
+function getDescriptorMain()
+{
+    getSSContent(calendar_container, 'getDescriptorMain', '');
+}
+
+function getDescriptor(desId)
+{
+    var params = "des_id=" + desId;
+    getSSContent(calendar_container, 'getDescriptor', params);
+}
+
+function toggleTaskStatus(workId, con)
+{
+    var ele = "ch_work_act_stat_" + workId;
+    var ch = $(ele).checked;
+    var params = "work_id=" + workId + "&ch=" + ch + "&con=" + con;
+    getSSContent(con, "toggleTaskStatus", params);
+}
+
+function getCatDes(desId, actId)
+{
+    var con = "cat_des_con_" + actId + "_" + desId;
+    var params = "des_id=" + desId;
+    loadToggle(con, "getCatDes", params);
+}
+
+function genSearch(event)
+{
+    if(event.keyCode == 13)
+    {
+        var search = $F('txt_gen_search');
+        var params = "search=" + e(search);
+        getSSContent(calendar_container, 'genSearch', params);
+    }
+}
+
+function searchMoreTasks(start)
+{
+    var con = "search_more_task_con_" + start;
+    var search = $F('txt_gen_search');
+    var params = "search=" + search + "&start=" + start;
+    getSSContent(con, "searchMoreTasks", params);
+}
+
+function searchMoreInfo(start)
+{
+    var con = "search_more_info_con_" + start;
+    var search = $F('txt_gen_search');
+    var params = "search=" + search + "&start=" + start;
+    getSSContent(con, "searchMoreInfo", params);
+}
+
+function loadPublicSearchInfo()
+{
+    var search = $F('txt_gen_search');
+    var params = "search=" + search;
+    getSSContent("public_info_list_con", "loadPublicSearchInfo", params);
+}
+
+function searchMorePublicInfo(start)
+{
+    var con = "search_more_pub_info_con_" + start;
+    var search = $F('txt_gen_search');
+    var params = "search=" + search + "&start=" + start;
+    getSSContent(con, "searchMorePublicInfo", params);
+}
+
+function toggleTab(ul, selectEle)
+{
+    var children = $(ul).childElements();
+
+    for(var i=0;i<children.length;i++)
+    {
+        children[i].removeClassName('tab_selected');
+    }
+
+    $(selectEle).addClassName('tab_selected');
+}
+
+function toggleMoreApps()
+{
+    if($('add_app_links_con').visible())
+    {
+        $('add_app_links_con').hide();
+        getSSContent("con_more_apps", "hideMoreApps", "");
+    }
+    else
+    {
+        $('add_app_links_con').show();
+        getSSContent("con_more_apps", "showMoreApps", "");
+    }
+}
+
+function sendTask(id)
+{
+    var title = $F("txt_task_title");
+    var des = $F("txt_task_des");
+    var email = $F("txt_email");
+    var friendArray = getSelectedCheckboxValue(document.getElementsByName("chSelectFriend[]"));
+    var friend = friendArray.join("_");
+
+    var params = "id=" + id + "&title=" + e(title) + "&des=" + e(des) + "&email=" + email + "&friend=" + friend;
+    getSSContent("send_task_con", "sendTask", params);
+}

@@ -1,0 +1,669 @@
+<?php
+
+/**
+ * Description of TemplateGuiUtility
+ *
+ * @author suyash
+ */
+class TemplateGuiUtility
+{
+
+    protected $defaultCssFiles;
+    protected $additionalCssFiles;
+    protected $defaultJsFiles;
+    protected $additionalJsFiles;
+    protected $externalJsFiles;
+    protected $javascriptImages;
+
+    public function __construct()
+    {
+        $this->initialiseCss();
+        $this->initialiseJs();
+        $this->initialiseJavascriptImages();
+    }
+
+    protected function initialiseCss()
+    {
+        $this->defaultCssFiles = array();
+        $this->defaultCssFiles[count($this->defaultCssFiles)] = "rounded";
+        $this->defaultCssFiles[count($this->defaultCssFiles)] = "epoch_calendar";
+        $this->defaultCssFiles[count($this->defaultCssFiles)] = "style";
+        $this->defaultCssFiles[count($this->defaultCssFiles)] = "modalbox";
+        $this->defaultCssFiles[count($this->defaultCssFiles)] = "calendar-brown";
+
+        $this->additionalCssFiles = array();
+    }
+
+    protected function initialiseJs()
+    {
+        $this->defaultJsFiles = array();
+        $this->defaultJsFiles[count($this->defaultJsFiles)] = array("file" => "prototype-1-6", "folder" => "");
+        $this->defaultJsFiles[count($this->defaultJsFiles)] = array("file" => "scriptaculous", "folder" => "scriptaculous");
+        $this->defaultJsFiles[count($this->defaultJsFiles)] = array("file" => "modalbox", "folder" => "");
+        $this->defaultJsFiles[count($this->defaultJsFiles)] = array("file" => "script", "folder" => "");
+        $this->defaultJsFiles[count($this->defaultJsFiles)] = array("file" => "ajax", "folder" => "");
+        $this->defaultJsFiles[count($this->defaultJsFiles)] = array("file" => "utilities", "folder" => "");
+        $this->defaultJsFiles[count($this->defaultJsFiles)] = array("file" => "calendar", "folder" => "calendar");
+        $this->defaultJsFiles[count($this->defaultJsFiles)] = array("file" => "calendar-en", "folder" => "calendar");
+        $this->defaultJsFiles[count($this->defaultJsFiles)] = array("file" => "calendar-setup", "folder" => "calendar");
+
+        $this->defaultJsFiles[count($this->defaultJsFiles)] = array("file" => "help_request", "folder" => "");
+        $this->defaultJsFiles[count($this->defaultJsFiles)] = array("file" => "info", "folder" => "");
+        $this->defaultJsFiles[count($this->defaultJsFiles)] = array("file" => "view", "folder" => "");
+
+        $this->additionalJsFiles = array();
+        $this->externalJsFiles = array();
+    }
+
+    protected function initialiseJavascriptImages()
+    {
+        $this->javascriptImages = array();
+        $this->javascriptImages[count($this->javascriptImages)] = array("image" => "expand.png", "var" => "expand");
+        $this->javascriptImages[count($this->javascriptImages)] = array("image" => "collapse.png", "var" => "collapse");
+    }
+
+    public function getNormalDisplay($title, $contentDate, $loadFacebookLibrary = false)
+    {
+        $output = "";
+
+        $output .= "<html xmlns=\"http://www.w3.org/1999/xhtml\">";
+        $output .= "<head id='head'>";
+        $output .= "<title>$title</title>";
+        $output .= "<link sizes='16x16' type='image/gif' href='".UrlConfiguration::getImageSrc("favicon.png")."' rel='icon'>";
+
+        $output .= $this->loadAllCss();
+        $output .= $this->loadAllJavascript();
+        $output .= $this->loadAllJavascriptImages();
+        $output .= $this->setJavascriptFolderPath(); //should always be called after other javascript files
+        $output .= $this->loadGoogleAnalytics();
+
+        $output .= "</head>";
+
+        $output .= "<body>";
+
+        if($loadFacebookLibrary)
+        {
+            $output .= TemplateGuiUtility::loadFacebookLibrary();
+        }
+
+	$output .= "<div>$contentDate</div>";
+
+        $output .= "<div id='mktipmsg' class='mktipmsg'></div>";
+        $output .= "</body>";
+        $output .= "</html>";
+
+        return $output;
+    }
+
+    protected static function loadFacebookLibrary()
+    {
+        $output = "";
+
+        $output .= "<div id='fb-root'></div>";
+        $output .= "<script src='http://connect.facebook.net/en_US/all.js'></script>";
+        $output .= "<script>";
+        $output .= "FB.init({";
+        $output .= "appId  : '245917528765965',";
+        $output .= "status : true,";
+        $output .= "cookie : true,";
+        $output .= "xfbml  : true,";
+        $output .= "channelURL : 'http://WWW.CALOPI.COM/channel.html',";
+        $output .= "oauth  : true";
+        $output .= "});";
+        $output .= "</script>";
+
+
+        return $output;
+    }
+
+    public function getUnloggedNormalDisplay($title, $dataMiddle, $dataRight)
+    {
+        $output = "";
+
+        $indexGuiUtility = new IndexGuiUtility();
+//        $userGuiUtility = new UserGuiUtility();
+
+//        $connectionParameters = Configuration::$CONNECTION_PARAMETERS;
+//        $profilePictureFolder = Configuration::$PROFILE_PICTURE_FOLDER;
+
+        $output .= "<html xmlns=\"http://www.w3.org/1999/xhtml\">";
+        $output .= "<head id='head'>";
+        $output .= "<title>$title</title>";
+        $output .= "<link sizes='16x16' type='image/gif' href='".UrlConfiguration::getImageSrc("favicon.png")."' rel='icon'>";
+
+        $output .= $this->loadAllCss();
+        $output .= $this->loadAllJavascript();
+        $output .= $this->loadAllJavascriptImages();
+        $output .= $this->setJavascriptFolderPath(); //should always be called after other javascript files
+        $output .= $this->loadGoogleAnalytics();
+
+        $output .= "</head>";
+
+        $output .= "<body>";
+        $output .= $this->getUnloggedTopContent($indexGuiUtility);
+        $output .= $this->getUnloggedMainContent($indexGuiUtility, $dataMiddle, $dataRight);
+        $output .= "<div id='mktipmsg' class='mktipmsg'></div>";
+        $output .= "</body>";
+        $output .= "</html>";
+
+        return $output;
+    }
+
+    public function getUnloggedDisplay($title, $dataMiddle)
+    {
+        $output = "";
+
+//        $indexGuiUtility = new IndexGuiUtility();
+//        $userGuiUtility = new UserGuiUtility();
+//
+//        $connectionParameters = Configuration::$CONNECTION_PARAMETERS;
+//        $profilePictureFolder = Configuration::$PROFILE_PICTURE_FOLDER;
+
+        $output .= "<html xmlns=\"http://www.w3.org/1999/xhtml\">";
+        $output .= "<head id='head'>";
+        $output .= "<title>$title</title>";
+        $output .= "<link sizes='16x16' type='image/gif' href='".UrlConfiguration::getImageSrc("favicon.png")."' rel='icon'>";
+
+        $output .= $this->loadAllCss();
+        $output .= $this->loadAllJavascript();
+        $output .= $this->loadAllJavascriptImages();
+        $output .= $this->setJavascriptFolderPath(); //should always be called after other javascript files
+        $output .= $this->loadGoogleAnalytics();
+
+        $output .= "</head>";
+
+        $output .= "<body>";
+        $output .= $dataMiddle;
+        $output .= "<div id='mktipmsg' class='mktipmsg'></div>";
+        $output .= "</body>";
+        $output .= "</html>";
+
+        return $output;
+    }
+
+    protected function getTopContent($userId, $connectionParameters, IndexGuiUtility $indexGuiUtility)
+    {
+        $output = "";
+
+        $output .= "<table class='max_width genericElement tableContent' style='background-color: orange;'>";
+        $output .= "<tr>";
+
+        $output .= "<td class='leftColumn genericContainer topContent'>";
+        $output .= "<a href='".UrlConfiguration::getRootPagesUrl("index.php")."'>";
+        $output .= "<img src='".UrlConfiguration::getImageSrc("logo.png")."' class='logo' alt='calopi logo' title='calopi logo' />";
+        $output .= "</a>";
+        $output .= "</td>";
+
+        $output .= "<td class='middleColumn genericContainer middleContent'>";
+        $output .= $indexGuiUtility->getTopLeftNavigation($userId, $connectionParameters);
+        $output .= "</td>";
+
+        $output .= "<td class='rightColumn genericContainer rightContent'>";
+        $output .= $indexGuiUtility->getTopRightNavigation();
+        $output .= "</td>";
+
+        $output .= "</tr>";
+        $output .= "</table>";
+
+        return $output;
+    }
+
+    protected function getAdminTopContent($userId, $connectionParameters)
+    {
+        $output = "";
+
+        $output .= "<table class='max_width genericElement tableContent' style='background-color: orange;'>";
+        $output .= "<tr>";
+
+        $output .= "<td class='leftColumn genericContainer topContent'>";
+        $output .= "<a href='".UrlConfiguration::getRootPagesUrl("admin.php")."'>";
+        $output .= "<img src='".UrlConfiguration::getImageSrc("logo.png")."' class='logo' alt='calopi logo' title='calopi logo' />";
+        $output .= "</a>";
+        $output .= "</td>";
+
+        $output .= "<td class='middleColumn genericContainer middleContent'>";
+//	$output .= $indexGuiUtility->getTopLeftNavigation($userId, $connectionParameters);
+        $output .= "</td>";
+
+        $output .= "<td class='rightColumn genericContainer rightContent'>";
+        $output .= Navigation::getAdminNavigation();
+        $output .= "</td>";
+
+
+
+        $output .= "</tr>";
+        $output .= "</table>";
+
+        return $output;
+    }
+
+    protected function getUnloggedTopContent(IndexGuiUtility $indexGuiUtility)
+    {
+        $output = "";
+
+        $output .= "<table class='max_width genericElement tableContent' style='background-color: orange;'>";
+        $output .= "<tr>";
+
+        $output .= "<td class='leftColumn genericContainer topContent'>";
+        $output .= "<a href='".UrlConfiguration::getRootPagesUrl("index.php")."'>";
+        $output .= "<img src='".UrlConfiguration::getImageSrc("logo.png")."' class='logo' alt='calopi logo' title='calopi logo' />";
+        $output .= "</a>";
+        $output .= "</td>";
+
+        $output .= "<td class='middleColumn genericContainer middleContent'>";
+        $output .= $indexGuiUtility->getUnloggedTopLeftNavigation();
+        $output .= "</td>";
+
+        $output .= "<td class='rightColumn genericContainer rightContent'>";
+        $output .= $indexGuiUtility->getUnloggedTopRightNavigation();
+        $output .= "</td>";
+
+        $output .= "</tr>";
+        $output .= "</table>";
+
+        return $output;
+    }
+
+    protected function getMainContent($userId, UserGuiUtility $userGuiUtility, IndexGuiUtility $indexGuiUtility, $dataMiddle, $dataRight, $selectedApplication = "")
+    {
+        $output = "";
+
+        $output .= "<table class='max_width genericElement tableContent'>";
+
+        $output .= "<tr>";
+        $output .= "<td class='leftColumn' style='padding-top: 5px;vertical-align: top;'>";
+        $output .= $this->getMainLeftContent($userId, $userGuiUtility, $indexGuiUtility, $selectedApplication);
+        $output .= "</td>";
+
+        $middleClass = "middleColumn";
+
+        if($dataRight == "")
+        {
+            $middleClass = "middleColumnFull";
+        }
+
+        $output .= "<td class='$middleClass genericContainer' style='border-left: solid thin gray;border-right: solid thin gray;padding-top: 5px;padding-right: 5px;' id='main_container'>";
+        $output .= $dataMiddle;
+        $output .= "</td>";
+
+        if($dataRight != "")
+        {
+            $output .= "<td class='rightColumn genericContainer' id='right_container' style='padding-top: 5px;'>";
+            $output .= $dataRight;
+            $output .= $this->getBarterKickAdDisplay();
+            $output .= "</td>";
+        }
+
+        $output .= "</tr>";
+
+        $output .= "</table>";
+
+        return $output;
+    }
+
+    private function getBarterKickAdDisplay()
+    {
+        $output = "";
+
+        $output .= "<div class='genericElement'>";
+        $output .= "<div id='barter_kick_con' style='font-size: 12px;width: 90%;font-family: verdana;margin-top: 20px;padding-top: 10px;border-top: solid thin lightgray;'></div>";
+        $output .= "<script src='http://barterkick.calopi.com/ad.php?i=ogwqnbhienb3khvo6pzripp5bdw7bitvc1z7' type='text/javascript'></script>";
+        $output .= "</div>";
+
+        return $output;
+    }
+
+    protected function getAdminMainContent($userId, UserGuiUtility $userGuiUtility, IndexGuiUtility $indexGuiUtility, $dataLeft, $dataMiddle)
+    {
+        $output = "";
+
+        $output .= "<table class='max_width genericElement tableContent'>";
+
+        $output .= "<tr>";
+
+        if($dataLeft != "")
+        {
+            $output .= "<td class='leftColumn genericContainer topContent' style='padding-top: 5px;'>";
+            $output .= $this->getAdminMainLeftContent($userId, $userGuiUtility, $indexGuiUtility, $dataLeft);
+            $output .= "</td>";
+        }
+
+        $output .= "<td class='genericContainer' style='border-left: solid thin gray;border-right: solid thin gray;padding-top: 5px;padding-right: 5px;' id='main_container'>";
+        $output .= $dataMiddle;
+        $output .= "</td>";
+
+//	$output .= "<td class='rightColumn genericContainer' id='right_container' style='padding-top: 5px;'>";
+//	$output .= $dataRight;
+//	$output .= "</td>";
+        $output .= "</tr>";
+
+        $output .= "</table>";
+
+        return $output;
+    }
+
+    protected function getUnloggedMainContent(IndexGuiUtility $indexGuiUtility, $dataMiddle, $dataRight)
+    {
+        $output = "";
+
+        $output .= "<table class='max_width genericElement tableContent'>";
+
+        $output .= "<tr>";
+        $output .= "<td class='leftColumn genericContainer topContent' style='padding-top: 5px;'>";
+        $output .= $this->getUnloggedMainLeftContent($indexGuiUtility);
+        $output .= "</td>";
+
+        $output .= "<td class='middleColumn genericContainer middleContent' style='border-left: solid thin gray;border-right: solid thin gray;padding-top: 5px;padding-right: 5px;' id='main_container'>";
+        $output .= $dataMiddle;
+        $output .= "</td>";
+
+        $output .= "<td class='rightColumn genericContainer rightContent' id='right_container' style='padding-top: 5px;'>";
+        $output .= $dataRight;
+        $output .= "</td>";
+        $output .= "</tr>";
+
+        $output .= "</table>";
+
+        return $output;
+    }
+
+    protected function getMainLeftContent($userId, UserGuiUtility $userGuiUtility, IndexGuiUtility $indexGuiUtility, $selectedApplication = "")
+    {
+        $output = "";
+
+        $profilePictureFolder = Configuration::$PROFILE_PICTURE_FOLDER;
+        $connectionParameters = Configuration::$CONNECTION_PARAMETERS;
+
+//        $output .= "<div class='genericElement max_width app_chooser'>";
+//        $output .= ApplicationManagerGuiUtility::getDisplay($selectedApplication);
+//        $output .= "</div>";
+
+        $output .= "<div class='genericElement max_width'>";
+        $output .= $userGuiUtility->retrieveUserDisplayNameWithThumbnail($userId, $connectionParameters, $profilePictureFolder, UserGuiUtility::$MEDIUM_DISPLAY_PIC);
+        $output .= "</div>";
+
+	$output .= "<div class='genericElement max_width'>";
+	$output .= $indexGuiUtility->getApplicationLinksDisplay();
+	$output .= "</div>";
+
+//        $output .= "<div class='genericElement max_width social_links'>";
+//        $output .= $indexGuiUtility->getSocialLinksDisplay();
+//        $output .= "</div>";
+
+        return $output;
+    }
+
+    protected function getAdminMainLeftContent($userId, UserGuiUtility $userGuiUtility, IndexGuiUtility $indexGuiUtility, $leftContent)
+    {
+        $output = "";
+
+//        $profilePictureFolder = Configuration::$PROFILE_PICTURE_FOLDER;
+//        $connectionParameters = Configuration::$CONNECTION_PARAMETERS;
+
+//	$output .= "<div class='genericElement max_width'>";
+//	$output .= $userGuiUtility->retrieveUserDisplayNameWithThumbnail($userId, $connectionParameters,
+//			$profilePictureFolder, UserGuiUtility::$MEDIUM_DISPLAY_PIC);
+//	$output .= "</div>";
+
+        $output .= "<div class='genericElement max_width'>";
+        $output .= $leftContent;
+        $output .= "</div>";
+
+        return $output;
+    }
+
+    protected function getUnloggedMainLeftContent(IndexGuiUtility $indexGuiUtility)
+    {
+        $output = "";
+
+        $userGuiUtility = new UserGuiUtility();
+
+//        $profilePictureFolder = Configuration::$PROFILE_PICTURE_FOLDER;
+//        $connectionParameters = Configuration::$CONNECTION_PARAMETERS;
+
+        $output .= "<div class='genericElement max_width'>";
+        $output .= $userGuiUtility->getUnloggedUserDisplay();
+        $output .= "</div>";
+
+        $output .= "<div class='genericElement max_width'>";
+        $output .= $indexGuiUtility->getApplicationLinksDisplay();
+        $output .= "</div>";
+
+        return $output;
+    }
+
+    public function getFriendDisplay($title, $dataMiddle, $dataRight, $friendUserId, $userId)
+    {
+        $output = "";
+
+        $indexGuiUtility = new IndexGuiUtility();
+//        $userGuiUtility = new UserGuiUtility();
+        $userFriendGuiUtility = new UserFriendGuiUtility();
+
+        $connectionParameters = Configuration::$CONNECTION_PARAMETERS;
+        $profilePictureFolder = Configuration::$PROFILE_PICTURE_FOLDER;
+
+        $userId = SessionHelper::getUserId();
+
+        $output .= "<html xmlns=\"http://www.w3.org/1999/xhtml\">";
+        $output .= "<head id='head'>";
+        $output .= "<title>$title</title>";
+        $output .= "<link sizes='16x16' type='image/gif' href='".UrlConfiguration::getImageSrc("favicon.png")."' rel='icon'>";
+
+        $output .= $this->loadAllCss();
+        $output .= $this->loadAllJavascript();
+        $output .= $this->loadAllJavascriptImages();
+        $output .= $this->setJavascriptFolderPath(); //should always be called after other javascript files
+        $output .= $this->loadGoogleAnalytics();
+
+        $output .= "</head>";
+
+        $output .= "<body>";
+        $output .= "<div class='mainNav'>";
+        $output .= "<div class='genericContainer genericElement leftColumn' style='background-color: gray;'>";
+        $output .= "<img src='".UrlConfiguration::getImageSrc("logo.png")."' class='logo' alt='calopi logo' title='calopi logo' />";
+        $output .= "</a>";
+        $output .= "</div>";
+        $output .= "<div class='genericContainer genericElement middleColumn'>";
+
+        $output .= $indexGuiUtility->getTopLeftNavigation($userId, $connectionParameters);
+
+        $output .= "</div>";
+        $output .= "<div class='genericContainer genericElement rightColumn'>";
+        $output .= $indexGuiUtility->getTopRightNavigation();
+        $output .= "</div>";
+        $output .= "</div>";
+        $output .= "<div class='mainContainer genericElement'>";
+        $output .= "<div class='mainContainerLeft genericElement leftColumn'>";
+
+        $output .= "<div class='genericElement max_width'>";
+        $output .= $userFriendGuiUtility->getFriendProfileDisplay($friendUserId, $userId, $connectionParameters, $profilePictureFolder);
+        $output .= "</div>";
+
+//	$output .= "<div class='genericElement max_width'>";
+//	$output .= $indexGuiUtility->getApplicationLinksDisplay($userId, $connectionParameters);
+//	$output .= "</div>";
+
+        $output .= "<div class='genericElement max_width'>";
+        $output .= $indexGuiUtility->getSocialLinksDisplay();
+        $output .= "</div>";
+
+        $output .= "</div>";
+        $output .= "<div class='mainContainerMiddle genericElement middleColumn'>";
+        $output .= "<div id='main_container'>";
+        $output .= $dataMiddle;
+        $output .= "</div>";
+        $output .= "</div>";
+        $output .= "<div id='right_container' class='mainContainerRight genericElement rightColumn'>";
+        $output .= $dataRight;
+        $output .= "</div>";
+        $output .= "</div>";
+
+        $output .= "<div id='mktipmsg' class='mktipmsg'></div>";
+
+        $output .= "</body>";
+        $output .= "</html>";
+
+        return $output;
+    }
+
+    protected function setJavascriptFolderPath()
+    {
+        $output = "";
+
+        $output .= "<script>";
+        $output .= "imageFolder = '".UrlConfiguration::getImageSrc("")."';";
+        $output .= "websiteAddress = '".Configuration::$URL."';";
+        $output .= "</script>";
+
+        return $output;
+    }
+
+    protected function loadGoogleAnalytics()
+    {
+        $output = "";
+
+        $output .= "<script type=\"text/javascript\">";
+
+        $output .= "var _gaq = _gaq || [];";
+        $output .= "_gaq.push(['_setAccount', 'UA-25773056-1']);";
+        $output .= "_gaq.push(['_trackPageview']);";
+
+        $output .= "(function() {";
+        $output .= "var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;";
+        $output .= "ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';";
+        $output .= "var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);";
+        $output .= "})();";
+
+        $output .= "</script>";
+
+        return $output;
+    }
+
+    public function getNormalDisplayWithoutMenu($data, $userId = "")
+    {
+        $output = "";
+
+        $output .= "<html xmlns=\"http://www.w3.org/1999/xhtml\">";
+        $output .= "<head id='head'>";
+
+        $output .= $this->loadAllCss();
+        $output .= $this->loadAllJavascript();
+        $output .= $this->setJavascriptFolderPath(); //should always be called after other javascript files
+        $output .= $this->loadGoogleAnalytics();
+
+        $output .= "<body>";
+        $output .= "<div id='main_container' class='main_content'>";
+        $output .= $data;
+        $output .= "</div>";
+        $output .= "</body>";
+
+        $output .= "</html>";
+
+        return $output;
+    }
+
+    public function getEmptyNormalDisplayWithoutMenu($data)
+    {
+        $output = "";
+
+        $output .= "<html xmlns=\"http://www.w3.org/1999/xhtml\">";
+        $output .= "<head id='head'>";
+
+        $output .= $this->loadAllCss();
+        $output .= $this->loadAllJavascript();
+        $output .= $this->setJavascriptFolderPath(); //should always be called after other javascript files
+        $output .= $this->loadGoogleAnalytics();
+
+        $output .= $data;
+
+        $output .= "</html>";
+
+        return $output;
+    }
+
+    protected function loadAllCss()
+    {
+        $output = "";
+
+        for($i = 0; $i < count($this->defaultCssFiles); $i++)
+        {
+            $output .= UrlConfiguration::loadCss($this->defaultCssFiles[$i]);
+        }
+
+        for($i = 0; $i < count($this->additionalCssFiles); $i++)
+        {
+            $output .= UrlConfiguration::loadCss($this->additionalCssFiles[$i]);
+        }
+
+        return $output;
+    }
+
+    protected function loadAllJavascript()
+    {
+        $output = "";
+
+        for($i = 0; $i < count($this->defaultJsFiles); $i++)
+        {
+            $output .= UrlConfiguration::loadJavascript($this->defaultJsFiles[$i]['file'], $this->defaultJsFiles[$i]['folder']);
+        }
+
+        for($i = 0; $i < count($this->additionalJsFiles); $i++)
+        {
+            $output .= UrlConfiguration::loadJavascript($this->additionalJsFiles[$i]['file'], $this->additionalJsFiles[$i]['folder']);
+        }
+
+        for($i = 0; $i < count($this->externalJsFiles); $i++)
+        {
+            $output .= UrlConfiguration::loadExternalJavascript($this->externalJsFiles[$i]);
+        }
+
+        return $output;
+    }
+
+    protected function loadAllJavascriptImages()
+    {
+        $output = "";
+
+        $output .= "<script>";
+
+        for($i = 0; $i < count($this->javascriptImages); $i++)
+        {
+            $output .= "var ".$this->javascriptImages[$i]['var']." = \"".UrlConfiguration::getImageSrc($this->javascriptImages[$i]['image'])."\";";
+        }
+
+        $output .= "</script>";
+
+        return $output;
+    }
+
+    public function addCssFile($css)
+    {
+        $this->additionalCssFiles[count($this->additionalCssFiles)] = $css;
+    }
+
+    public function addJsFile($js, $folder = "")
+    {
+        if($folder == "")
+        {
+            $this->additionalJsFiles[count($this->additionalJsFiles)] = array("file" => $js, "folder" => "");
+        }
+        else
+        {
+            $this->additionalJsFiles[count($this->additionalJsFiles)] = array("file" => $js, "folder" => $folder);
+        }
+    }
+
+    public function addGoogleMapApi()
+    {
+        $this->externalJsFiles[count($this->externalJsFiles)] = "http://maps.google.com/maps/api/js?sensor=false";
+    }
+
+    public function addTwitterTweetApi()
+    {
+        $this->externalJsFiles[count($this->externalJsFiles)] = "http://platform.twitter.com/widgets.js";
+    }
+
+}
+
+?>

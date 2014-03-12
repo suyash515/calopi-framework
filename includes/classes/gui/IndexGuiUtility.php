@@ -1,0 +1,76 @@
+<?php
+
+/**
+ * Description of IndexGuiUtility
+ *
+ * @author suyash
+ */
+class IndexGuiUtility
+{
+
+    public static function getDisplay()
+    {
+        $output = "";
+
+        $s = DIRECTORY_SEPARATOR;
+        $defaultDirectory = "C:".$s."xampp".$s."htdocs".$s."new_project".$s;
+        $defaultUrl = "http://localhost/new_project/";
+
+        $output .= "<table id='mytable'>";
+
+        $output .= "<tr>";
+        $output .= "<th>Directory to generate project(Add a folder ending with $s):</th>";
+        $output .= "<td>";
+        $output .= "<input type='text' style='width: 300px;' id='txt_directory' value='$defaultDirectory' />";
+        $output .= "</td>";
+        $output .= "</tr>";
+
+        $output .= "<tr>";
+        $output .= "<th>Project URL(Add a url ending with /):</th>";
+        $output .= "<td>";
+        $output .= "<input type='text' style='width: 300px;' id='txt_url' value='$defaultUrl' />";
+        $output .= "</td>";
+        $output .= "</tr>";
+
+        $output .= "<tr>";
+        $output .= "<th>Database Host:</th>";
+        $output .= "<td>";
+        $output .= "<input type='text' style='width: 300px;' id='txt_host' value='localhost' />";
+        $output .= "</td>";
+        $output .= "</tr>";
+
+        $output .= "<tr>";
+        $output .= "<th>Database Name:</th>";
+        $output .= "<td>";
+        $output .= "<input type='text' style='width: 300px;' id='txt_db_name' value='' />";
+        $output .= "</td>";
+        $output .= "</tr>";
+
+        $output .= "<tr>";
+        $output .= "<th>Database User:</th>";
+        $output .= "<td>";
+        $output .= "<input type='text' style='width: 300px;' id='txt_user' value='root' />";
+        $output .= "</td>";
+        $output .= "</tr>";
+
+        $output .= "<tr>";
+        $output .= "<th>Database Password:</th>";
+        $output .= "<td>";
+        $output .= "<input type='password' style='width: 300px;' id='txt_password' />";
+        $output .= "</td>";
+        $output .= "</tr>";
+
+        $output .= "<tr>";
+        $output .= "<td colspan='2' style='text-align: center;'>";
+        $output .= "<input type='button' value='Generate Structure' onclick=\"generateStructure();\" />";
+        $output .= "</td>";
+        $output .= "</tr>";
+
+        $output .= "</table>";
+
+        return $output;
+    }
+
+}
+
+?>

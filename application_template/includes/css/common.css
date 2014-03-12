@@ -1,0 +1,21 @@
+.calopi
+{
+    color: orange;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.warning
+{
+    background-image: url('../../images/warning.png');
+    background-repeat: no-repeat;
+    padding-left: 50px;
+}
+
+.error
+{
+    background-image: url('../../images/error.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 20px;
+}

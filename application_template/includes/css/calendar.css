@@ -1,0 +1,278 @@
+/*
+    Document   : calendar
+    Created on : Feb 9, 2012, 5:28:06 PM
+    Author     : suyash
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.cal_td_1
+{
+    width: 15%;
+    font-size: 16px;
+    text-align: center;
+}
+
+.cal_td_2
+{
+    width: 40%;
+    text-align: center;
+    font-size: 26px;
+    border-left: solid thin gray;
+    border-right: solid thin gray;
+}
+
+table.cal_data
+{
+    border-collapse: collapse;
+    border: solid thin gray;
+}
+
+td.cal_data
+{
+    height: 100px;
+    border: solid thin gray;
+    vertical-align: top;
+}
+
+td.current_day
+{
+    background-color: #98FB98;
+}
+
+/*div.cal_data
+{
+    height: 100px;
+    overflow: auto;
+}*/
+
+td.cal_data_blur
+{
+    height: 100px;
+    border: solid thin gray;
+    background-color: lightgray;
+}
+
+.cal_head
+{
+    width: 14%;
+    border: solid thin gray;
+}
+
+/*.cal_date_day
+{
+    float: left;
+    width: 100%;
+    height: 20px;
+}*/
+
+/*.cal_date_task_con
+{
+    float: left;
+    clear: left;
+    width: 100%;
+}*/
+
+/*.cal_task_det
+{
+    width: 100%;
+}*/
+
+.cal_task_det:hover
+{
+    background-color: lightgray;
+}
+
+.cal_task_link
+{
+    color: black;
+    /*    width: 100%;
+        padding-left: 2px;
+        padding-right: 2px;*/
+}
+
+/*.cal_task_link:hover
+{*/
+/*    text-decoration: underline;*/
+/*    background-color: lightgray;*/
+/*}*/
+
+/*.cal_date_day_view
+{
+    padding: 2px 20px 2px 20px;
+}
+
+.cal_date_day_view:hover
+{
+    background-color: gray;
+    color: white;
+}*/
+
+table.add_home_task
+{
+    width: 100%;
+}
+
+td.add_home_task_label
+{
+    width: 10%;
+    vertical-align: top;
+}
+
+td.view_home_task_label
+{
+    width: 10%;
+    vertical-align: top;
+    font-size: 14px;
+    padding-top: 10px;
+}
+
+td.add_home_task_value
+{
+    width: 90%;
+}
+
+td.view_home_task_value
+{
+    width: 90%;
+    font-size: 14px;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+input.add_home_task
+{
+    width: 100%;
+    height: 30px;
+    font-size: 18px;
+}
+
+textarea.add_home_task
+{
+    width: 100%;
+    height: 200px;
+}
+
+.add_home_task_cmd_con
+{
+    text-align: center;
+    padding-top: 20px;
+}
+
+.add_home_task_cmd
+{
+    font-size: 16px;
+    width: 100px;
+}
+
+.add_home_task_date
+{
+    width: 60px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.box_with_work
+{
+    color: orangered;
+}
+
+.tooltip_work
+{
+    color: black;
+}
+
+.date_box_header
+{
+    float: left;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.date_box_date
+{
+    float: left;
+    width: 20%;
+    padding-left: 5px;
+}
+
+.date_box_count
+{
+    float: right;
+    padding-right: 15px;
+}
+
+.date_box_content_list
+{
+    width: 100%;
+    float: left;
+    clear: left;
+    height: 80px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.date_box_content
+{
+    width: 100%;
+    height: 16px;
+    font-size: 11px;
+    overflow: hidden;
+    float: left;
+    padding: 2px;
+    cursor: pointer;
+    border-top: solid thin #E5E5E5;
+}
+
+.home_date_chooser
+{
+    font-size: 16px;
+}
+
+
+
+.date_choice_month
+{
+    width: 150px;
+    height: 37px;
+    font-size: 23px;
+}
+
+.date_choice_year
+{
+    width: 70px;
+    height: 37px;
+    font-size: 23px;
+    text-align: center;
+}
+
+.date_choice_go
+{
+    width: 50px;
+    height: 37px;
+    font-size: 23px;
+    text-align: center;
+}
+
+div.edit_date_cal
+{
+    text-align: center;
+}
+
+table.edit_date_cal
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.status_box
+{
+    float: left;
+    margin-right: 5px;
+    margin-top: 3px;
+    width: 10px;
+    height: 10px;
+}

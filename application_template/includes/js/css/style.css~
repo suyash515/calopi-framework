@@ -1,0 +1,1439 @@
+body
+{
+    font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+    font-size: 11px;
+    margin: 0px;
+}
+
+a
+{
+    text-decoration: none;
+    color: #CD6600;
+}
+
+img
+{
+    border: none;
+}
+
+table
+{
+    font-size: 11px;
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+
+hr
+{
+    color: gray;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.leftColumn
+{
+    width: 15%;
+}
+
+.middleColumn
+{
+    width: 50%;
+}
+
+.rightColumn
+{
+    width: 29%;
+}
+
+.topContent
+{
+    background-color: black;
+}
+
+.middleContent
+{
+    background-color: black;
+}
+
+.rightContent
+{
+    background-color: black;
+}
+
+/** If there is no right column, it takes the width of .middleColumn and .rightColumn combined**/
+.middleColumnFull
+{
+    width: 79%;
+}
+
+.tableContent
+{
+    margin-top: 0px;
+    border-collapse: collapse;
+    font-size: 11px;
+}
+
+.genericContainer
+{
+    padding-left: 10px;
+    vertical-align: top;
+    /*padding-right: 10px;*/
+}
+
+.genericElement
+{
+    float: left;
+}
+
+.genericElement2
+{
+    float: right;
+}
+
+.mainNav
+{
+    width: 100%;
+    height: 35px;
+    clear: right;
+    text-align: center;
+    border-bottom: thin solid gray;
+    background-color: orange;
+    vertical-align: middle;
+}
+
+.navElement
+{
+    padding-top: 10px;
+    padding-right: 5px;
+    font-weight: bold;
+    color: #777777;
+}
+
+a.navElement
+{
+/*    color: #777777;*/
+    color: orange;
+}
+
+a.navElement:hover
+{
+    color: white;
+}
+
+a.specialNavElement
+{
+    color: lightblue;
+}
+
+.mainContainer
+{
+    width: 100%;
+    height: 100%;
+}
+
+.mainContainerLeft
+{
+    height: 100%;
+    text-align: right;
+    /*border-right: solid thin gray;*/
+    padding: 10px;
+}
+
+.mainContainerMiddle
+{
+    height: 100%;
+    border-right: solid thin gray;
+    border-left: solid thin gray;
+    padding: 10px;
+}
+
+.mainContainerRight
+{
+    height: 100%;
+    padding: 10px;
+}
+
+.contentDate
+{
+    padding-top: 0px;
+    font-weight: bold;
+}
+
+.contentDataCon
+{
+    padding-top: 10px;
+    padding-bottom: 25px;
+}
+
+.contentData
+{
+    padding: 5px;
+    border-bottom: solid thin #E0E0E0;
+}
+
+.calendarMainCon
+{
+    text-align: center;
+}
+
+.taskList
+{
+    text-align: left;
+    padding-top: 10px;
+}
+
+.taskTime
+{
+    color: #888888;
+}
+
+.taskTitle
+{
+
+}
+
+.taskCon
+{
+    padding-top: 5px;
+    width: 100%;
+    clear: left;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.taskCon_hover
+{
+    background-color: #F5F5F5;
+}
+
+.task_time, .task_title, .task_des_ind, .task_options_con
+{
+    padding-top: 3px;
+    padding-left: 5px;
+}
+
+.task_edit_des
+{
+    clear: left;
+}
+
+.task_first_line
+{
+    width: 100%;
+}
+
+.task_second_line
+{
+    width: 100%;
+    clear: left;
+}
+
+.task_des_con
+{
+    padding: 10px;
+    width: 95%;
+}
+
+.task_des_con1
+{
+    padding-bottom: 10px;
+    width: 100%;
+    text-align: left;
+}
+
+.edit_desc_con
+{
+    width: 100%;
+}
+
+.quick_add_text_con
+{
+    width: 70%;
+}
+
+.quick_add_text
+{
+    width: 100%;
+}
+
+.div_add_quick_task
+{
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    /*border-bottom: solid thin #E0E0E0;*/
+}
+
+.quick_add_str
+{
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.click
+{
+    cursor: pointer;
+}
+
+img.profile
+{
+    width: 50px;
+}
+
+div.profile
+{
+    padding-left: 10px;
+}
+
+div.profile2
+{
+    padding-bottom: 10px;
+}
+
+a.profile
+{
+    font-weight: bold;
+}
+
+img.logo
+{
+    float: right;
+    width: 70px;
+}
+
+div.index_app_list
+{
+    padding-left: 10px;
+    padding-top: 5px;
+    text-align: left;
+    clear: both;
+}
+
+img.index_app_list
+{
+    padding-right: 5px;
+    float: left;
+}
+
+.max_width
+{
+    width: 100%;
+}
+
+.cen_al
+{
+    text-align: center;
+}
+
+.cal_nav
+{
+    float: left;
+    padding: 5px;
+    width: 100%;
+}
+
+.cal_nav_inside
+{
+    width: 100%;
+    text-align: center;
+    border-bottom: solid thin #E0E0E0;
+    padding-bottom: 5px;
+}
+
+table.task
+{
+    font-size: 11px;
+}
+
+.quick_task_header_details
+{
+    font-weight: bold;
+    float: left;
+}
+
+.quick_task_header_cat
+{
+    font-weight: bold;
+    padding-top: 10px;
+    float: left;
+}
+
+a.edit, a.delete, a.postpone, a.copy, a.requestHelp
+{
+    font-size: 9px;
+}
+
+.header
+{
+    clear: left;
+    font-size: 14px;
+}
+
+.cal_day_nav_current
+{
+    font-size: 14px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-left: solid thin gray;
+    border-right: solid thin gray;
+}
+
+.cal_day_nav
+{
+    font-size: 8px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-left: solid thin gray;
+}
+
+.cal_day_nav_next
+{
+    font-size: 8px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-right: solid thin gray;
+}
+
+.section_header
+{
+    font-size: 16px;
+    padding: 10px;
+}
+
+.text_float
+{
+    margin-top: 5px;
+}
+
+.date_image
+{
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.status_task_info
+{
+    color: #838B83;
+}
+
+.des_label
+{
+    margin-left: 2px;
+    font-size: 9px;
+    margin-top: 5px;
+}
+
+.twitter_label
+{
+    margin-left: 5px;
+    font-size: 9px;
+}
+
+.attributes_label
+{
+    margin-left: 2px;
+    font-size: 9px;
+    margin-top: 5px;
+}
+
+.taskList
+{
+    clear: left;
+}
+
+.sharedUser
+{
+    margin-left: 10px;
+}
+
+.sharedDesList
+{
+    clear: left;
+}
+
+.sharedDesItem
+{
+    clear: left;
+    margin-top: 5px;
+    width:100%;
+}
+
+.sharedDesTitle
+{
+    margin-left: 5px;
+}
+
+.sharedDesOwner
+{
+    margin-left: 5px;
+}
+
+.error
+{
+    clear: left;
+}
+
+.taskLogAction
+{
+}
+
+.task_des_textarea
+{
+    height: 150px;
+}
+
+.sugg
+{
+    color: orange;
+}
+
+.sugg:hover
+{
+    color: white;
+}
+
+.mainSearch
+{
+    /*width: 300px;*/
+    height: 90%;
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+.con_link
+{
+    padding: 5px;
+    color: black;
+    width: 100%;
+}
+
+.con_link:hover
+{
+    background-color: orange;
+}
+
+table.list
+{
+    width: 99%;
+    border-collapse: collapse;
+    border: thin solid gray;
+    background-color: #5C5C5C;
+    color: white;
+}
+
+th.list
+{
+    border: thin solid gray;
+    text-align: center;
+    font-size: 12px;
+}
+
+td.list
+{
+    border: thin solid;
+    border-color: gray;
+    font-size: 11px;
+}
+
+tr.list:hover
+{
+    background-color: #888;
+}
+
+.quick_link
+{
+    clear: left;
+    margin-top: 5px;
+    width: 100%;
+}
+
+.quick_link_title
+{
+    border-bottom: solid thin  #E0E0E0;
+    margin-top: 20px;
+    padding-top: 5px;
+}
+
+a.tab_button
+{
+    padding: 10px;
+    border: solid thin orange;
+    margin-right: 10px;
+    width: 70px;
+}
+
+a.tab_button:hover
+{
+    background-color: orange;
+    font-weight: bold;
+    color: black;
+}
+
+/**Autocomplete**/
+div.autocomplete
+{
+    position:absolute;
+    width:250px;
+    background-color:white;
+    border:1px solid #888;
+    margin:0;
+    padding:0;
+    font-size: 11px;
+}
+
+div.autocomplete ul
+{
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+
+div.autocomplete ul li.selected
+{
+    background-color: #ffb;
+    color: black;
+}
+
+div.autocomplete ul li
+{
+    color: black;
+    list-style-type:none;
+    display:block;
+    margin:0;
+    padding:2px;
+    height:32px;
+    cursor:pointer;
+}
+
+span.auto_res
+{
+    font-weight: bold;
+}
+
+span.auto_com_header
+{
+    font-weight: bold;
+}
+
+.new_task_des_con
+{
+    padding: 10px;
+}
+
+.quick_add_task_com
+{
+    margin-top: 5px;
+}
+
+.add_task_buttons
+{
+    padding-left: 5px;
+}
+
+.quick_add_task_cat
+{
+    clear: left;
+    padding: 20px;
+}
+
+.con_new_task_pro
+{
+    clear: left;
+}
+/**End of Autocomplete**/
+
+
+/**Categories**/
+.select_des_parent
+{
+    clear: left;
+}
+
+.select_most_des_parent
+{
+    clear: left;
+    margin-top: 10px;
+}
+
+.most_used_cat_header
+{
+    clear: left;
+}
+/**End of Categories**/
+
+/**Right Calendar Bar**/
+.set_date
+{
+    margin-top: 7px;
+}
+
+.cal_option_con
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-bottom: solid thin #E0E0E0;
+}
+
+.status_combo
+{
+    clear: left;
+    margin-top: 10px;
+}
+
+.lim_cal_day_header
+{
+    clear: left;
+    margin-bottom: 50px;
+    border-bottom: solid thin #E0E0E0;
+}
+
+.no_tasks_con
+{
+    clear: left;
+    margin: 10px;
+    color: #E0E0E0;
+}
+
+.limited_cal_header
+{
+    margin-bottom: 20px;
+}
+/**End of Right Calendar Bar**/
+
+/**Info styles**/
+.innerListInfo
+{
+    clear: left;
+    width: 100%;
+}
+
+.infoCon
+{
+    border-top: solid thin #C0C0C0;
+    clear: left;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.infoHeader
+{
+    width: 100%;
+    text-align: center;
+}
+
+.infoSearchDes
+{
+    margin-top: 5px;
+    margin-left: 5px;
+    border-bottom: solid thin #E0E0E0;
+}
+
+.infoDate
+{
+    margin-top: 5px;
+}
+
+.infoInd
+{
+    margin-top: 5px;
+    margin-left: 5px;
+}
+/**End of Info styles**/
+
+/**Views styles**/
+.addViewButton
+{
+    clear: left;
+}
+
+.view_header
+{
+    width: 100%;
+    text-align: center;
+}
+
+.view_ele
+{
+    clear: left;
+    height: 20px;
+}
+/**End of Views styles**/
+
+/**Friends styles**/
+.friendHeader
+{
+    width: 100%;
+    text-align: center;
+}
+
+.friendElement
+{
+    margin-top: 10px;
+}
+
+.firstFriendElement
+{
+    clear: left;
+}
+
+.displayPic
+{
+    border: solid medium gray;
+    border-width: 2px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 25px;
+}
+
+.displayPicMedium
+{
+    border: solid medium gray;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 120px;
+}
+
+.user_display_name
+{
+    margin-top: 10px;
+}
+
+.main_profile_disp
+{
+    padding-bottom: 10px;
+    border-bottom: solid thin #E0E0E0;
+}
+
+.friendListItem
+{
+    clear: left;
+    margin-top: 10px;
+}
+
+.friend_ind_list_item
+{
+    min-height: 32px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-bottom: solid thin #E0E0E0;
+}
+
+.friendResCon
+{
+    margin-top: 13px;
+}
+
+.friendListDisName
+{
+    margin-top: 3px;
+}
+
+.friendActCon
+{
+    margin-top: 3px;
+    margin-left: 10px;
+}
+
+.friendProfCon
+{
+    clear: left;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.friendActItem
+{
+    margin-left: 5px;
+}
+
+.friendMsgCon
+{
+    padding-top: 10px;
+    margin-top: 5px;
+    border-top: solid thin #E0E0E0;
+}
+
+.friendActHeader
+{
+    width: 100%;
+    text-align: center;
+}
+
+.friend_select_list
+{
+    clear: left;
+}
+
+.userAct
+{
+    margin-top: 3px;
+}
+
+.msgItem
+{
+    margin-top: 3px;
+    margin-left: 5px;
+}
+
+.msgEle
+{
+    clear: left;
+    margin-top: 5px;
+}
+
+.msgContent
+{
+    clear: left;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 50px;
+}
+
+.addAsFriend
+{
+    clear: left;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: solid thin #E0E0E0;
+}
+/**End of Friends styles**/
+
+/**Settings Styles**/
+.settingHeader
+{
+    width: 100%;
+    text-align: center;
+}
+
+.settingsEle
+{
+    clear: left;
+    margin-top: 10px;
+    width: 100%;
+
+}
+/**End of Settings Styles**/
+
+/**Descriptor Styles**/
+.des_con
+{
+    overflow: auto;
+}
+
+.des_actions
+{
+    margin-top: 10px;
+}
+
+.des_actions_con
+{
+    margin-top: 10px;
+    border-top: solid thin #E0E0E0;
+}
+
+.edit_des_con
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.des_details_con
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cat_num_con
+{
+    margin-top: 10px;
+}
+
+.friend_share_con
+{
+    margin-top: 10px;
+}
+
+.friend_share_list
+{
+    text-align: left;
+}
+
+.friend_share_list_ele
+{
+    clear: left;
+    margin-top: 5px;
+}
+
+.des_share_send_mail_opt
+{
+    clear: left;
+    margin-top: 10px;
+}
+
+.user_list_des_share
+{
+    clear: left;
+    margin-top: 5px;
+}
+
+.shared_users_header
+{
+    margin-top: 40px;
+}
+/**End of Descriptor Styles**/
+
+/**Activity Styles**/
+.activity
+{
+    clear: left;
+    /*margin-top: 5px;*/
+    padding-top: 5px;
+    border-bottom: solid thin #E0E0E0;
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.activity:hover
+{
+
+}
+
+.activityCon
+{
+    clear: left;
+    margin-top: 15px;
+    padding-left: 100px;
+    /*border-bottom: solid thin black;*/
+}
+
+.activity_date
+{
+    margin-top: 3px;
+    margin-left: 10px;
+}
+
+.activity_des
+{
+    margin-top: 3px;
+    margin-left: 10px;
+}
+
+.activityDateHeader
+{
+    margin-bottom: 20px;
+    clear: left;
+}
+
+.work_act_des
+{
+    padding: 10px;
+}
+
+.act_req_ans
+{
+    padding-left: 10px;
+    padding-top: 10px;
+}
+/**End of Activity Styles**/
+
+/**Help Request Styles**/
+.help_request_section
+{
+    margin-top: 10px;
+}
+
+.helpReqDes
+{
+    width: 100%;
+    height: 150px;
+}
+
+.helpReqField
+{
+    width: 1%;
+    vertical-align: top;
+    padding-top: 5px;
+}
+
+.helpReqOptionshelpReqField
+{
+    clear: left;
+}
+
+.answerContainer
+{
+    height: 150px;
+    width: 100%;
+}
+
+.answerElement
+{
+    margin-left: 5px;
+}
+
+.requestElement
+{
+    margin-left: 5px;
+}
+
+.answerListCon
+{
+    margin: 10px;
+}
+
+.answerListElement
+{
+    /*border-top: solid thin #E0E0E0;*/
+}
+
+.ansListIndEle
+{
+    border-top: solid thin #E0E0E0;
+    margin-top: 10px;
+    padding-top: 5px;
+    width: 90%;
+}
+
+.requestList
+{
+    margin-top: 10px;
+}
+
+.reqIndEle
+{
+    margin-top: 5px;
+}
+
+.ans_list_con
+{
+    padding: 10px;
+}
+/**End of Help Request Styles**/
+
+/**Search Styles**/
+.searchElement
+{
+    margin: 5px;
+    clear: left;
+    width: 100%;
+}
+
+.searchResultSection
+{
+    margin-top: 10px;
+    padding-top: 5px;
+    border-top: solid thin #E0E0E0;
+    clear: left;
+    width: 100%;
+}
+
+.public_info_search
+{
+    float: left;
+    width: 45%;
+}
+
+.private_info_search
+{
+    float: left;
+    width: 45%;
+}
+/**End of Search Styles**/
+
+
+/**Feeds Styles**/
+.feed_item
+{
+    width: 100%;
+    border-bottom:  solid thin #E0E0E0;
+    padding-bottom: 5px;
+    overflow: hidden;
+}
+
+.feed_list_item
+{
+    padding: 5px;
+    padding-left: 10px;
+}
+
+.feed_title_link
+{
+    color: #7C8CC5;
+    font-size: 13px;
+}
+
+.feed_title_link:hover
+{
+    color: black;
+}
+
+.feed_des
+{
+    width: 100%;
+    font-size: 11px;
+    padding: 10px;
+}
+/**End of Feeds Styles**/
+
+/**Task Request Styles**/
+.task_req_title
+{
+    height: 150px;
+    width: 100%;
+}
+
+.task_req_list_item
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: solid thin #E0E0E0;
+}
+
+.task_req_list_item_des
+{
+    padding: 10px;
+}
+
+.add_to_cal_con
+{
+    padding-top: 10px;
+    padding-left: 10px;
+}
+/**End of Task Request Styles**/
+
+/**Todo Styles**/
+.edit_todo_con
+{
+    border-top: solid thin #E0E0E0;
+    border-bottom: solid thin #E0E0E0;
+    margin-bottom: 15px;
+}
+/**End of Todo Styles**/
+
+/**Tabs Styles**/
+.tab_header ul
+{
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+
+.tab_header li
+{
+    border-color: #BBBBBB;
+    border-style: solid;
+    border-width: 1px 1px 0;
+    float: left;
+    margin: 0;
+}
+
+.tab_header a
+{
+    background: none repeat scroll 0 0 #EEEEEE;
+    color: #0000CC;
+    display: block;
+    padding: 0.24em 1em;
+    text-align: center;
+    text-decoration: none;
+    width: 8em;
+}
+
+.tab_header a:hover
+{
+    background: none repeat scroll 0 0 #DDDDFF;
+}
+
+.tab_header .tab_selected
+{
+    border-color: black;
+}
+
+.tab_header .tab_selected a
+{
+    background: none repeat scroll 0 0 white;
+    color: black;
+    font-weight: bold;
+    position: relative;
+    top: 1px;
+}
+
+.tab_content
+{
+    border: 1px solid black;
+    clear: both;
+    padding: 5px;
+}
+/**End of Tabs Styles**/
+
+/**End of Form Styles**/
+td.field
+{
+    text-align: right;
+}
+
+input.field
+{
+    width: 200px;
+    height: 20px;
+}
+
+select.field
+{
+    width: 200px;
+    height: 25px;
+}
+
+input.field_date
+{
+    width: 180px;
+    height: 15px;
+}
+
+textarea.field
+{
+    width: 202px;
+    height: 190px;
+}
+
+.form_header
+{
+    border-bottom: solid thin gray;
+    padding-top: 10px;
+}
+/**End of Form Styles**/
+
+/**Tooltip Styles**/
+.mktipmsg
+{
+    padding: 5px;
+    background-color: #FFF8DC;
+    border: 1px solid #DEB887;
+    color: #6b6b6b;
+    display:none;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+/**End of Tooltip Styles**/
+
+/**Application Chooser Styles**/
+div.app_chooser
+{
+    text-align: center;
+    width: 100%;
+    border-bottom: thin solid #E0E0E0;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding-bottom: 10px;
+}
+
+div.app_chooser_con
+{
+    width: 100%;
+    cursor: pointer;
+}
+
+div.app_choice
+{
+    width: 100%;
+    height: 30px;
+    font-size: 18px;
+}
+
+div.app_choice_list_item
+{
+    width: 100%;
+    font-size: 16px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+a.app_choise_list_item
+{
+    color: black;
+    width: 85%;
+    padding: 5px;
+}
+
+a.app_choise_list_item:hover
+{
+    background-color: #E0E0E0;
+}
+/**End of Application Chooser Styles**/
+
+/**Social Links Styles**/
+.social_links
+{
+    /*
+    border-top: solid thin #dcdcdc;
+    margin-top: 10px;
+    padding-top: 5px;
+    */
+    text-align: center;
+    width: 100%;
+}
+
+div.index_social_list
+{
+    padding-left: 10px;
+    padding-top: 5px;
+    text-align: center;
+    clear: both;
+    width: 100%;
+}
+
+img.index_social_list
+{
+    padding-right: 5px;
+    float: left;
+}
+/**End of Social Links Styles**/
+
+
+/**User Status Styles**/
+.user_status_con
+{
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    border-bottom: solid thin #E0E0E0;
+}
+/**End of User Status Styles**/
+
+
+/**Travel Comments Styles**/
+.trav_comment
+{
+    text-align: left;
+    padding: 10px;
+    margin: 5px;
+    border: solid thin #E0E0E0;
+    width: 95%;
+}
+
+.trav_comment_att
+{
+    font-style: italic;
+    color: #999;
+}
+/**End of Travel Comments Styles**/
+
+/**Status Styles**/
+.status_back_color
+{
+    width: 10px;
+}
+
+.status_title_con
+{
+    padding-right: 10px;
+}
+
+.status_title
+{
+    font-weight: bold;
+    width: 80px;
+}
+/**End of Status Styles**/

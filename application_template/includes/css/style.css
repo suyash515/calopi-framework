@@ -1,0 +1,55 @@
+/*add/edit table styles*/
+table
+{
+    border-collapse: collapse;
+    border: solid thin lightgray;
+}
+
+td.field
+{
+    text-align: right;
+    border-bottom: solid thin lightgray;
+    border-right: solid thin lightgray;
+}
+
+input.field
+{
+    width: 250px;
+}
+
+textarea.field
+{
+    width: 250px;
+    height: 150px;
+}
+
+select
+{
+    width: 250px;
+}
+/*end of add/edit table styles*/
+
+/*list table styles*/
+table.list_table
+{
+    border-collapse: collapse;
+    border: solid thin lightgray;
+    width: 100%;
+}
+
+th.list_table_header
+{
+    text-align: center;
+    border: solid thin lightgray;
+}
+
+td.list_table_data
+{
+    border: solid thin lightgray;
+}
+
+td.list_table_data_act
+{
+    border: solid thin lightgray;
+}
+/*end list table styles*/
