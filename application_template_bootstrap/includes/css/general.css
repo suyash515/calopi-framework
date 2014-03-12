@@ -1,0 +1,112 @@
+/********************  TEMPLATE STYLES  ***********************************************/
+.template_container
+{
+    padding-top: 50px;
+}
+/********************  END OF TEMPLATE STYLES  ***********************************************/
+
+/********************  PAGE STYLES  ***********************************************/
+.header
+{
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 20px 0px;
+}
+
+.result_message
+{
+    width: 100%;
+    text-align: center;
+    padding: 10px 0px;
+    font-size: 20px;
+    color: green;
+}
+
+.action_message
+{
+    width: 100%;
+    text-align: center;
+    border: #0070FF dashed thin;
+    padding: 5px 0px;
+}
+
+.error_message
+{
+    width: 100%;
+    text-align: center;
+    border: red dashed medium;
+    padding: 5px 0px;
+    font-weight: bold;
+}
+
+/********************  END OF PAGE STYLES ***********************************************/
+
+/********************  FORMS TABLE ***********************************************/
+table.form_table
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table.form_table th
+{
+    text-align: center;
+}
+
+table.form_table input
+{
+    width: 300px;
+    height: 20px;
+}
+
+table.form_table input.checkbox
+{
+    width: 50px;
+}
+
+table.form_table textarea
+{
+    width: 300px;
+    height: 100px;
+}
+
+table.form_table input.form_button
+{
+    width: 200px;
+    height: 40px;
+    font-size: 18px;
+}
+
+table.form_table input.ch
+{
+    width: 20px;
+    margin-right: 10px;
+}
+
+table.form_table .form_button_con
+{
+    text-align: center;
+}
+
+table.form_table .form_msg_con
+{
+    text-align: center;
+}
+
+table.form_table select
+{
+    width: 300px;
+    height: 25px;
+}
+
+table.form_table td
+{
+    height: 20px;
+    padding: 5px 5px 5px 0px;
+    text-align: left;
+    vertical-align: middle;
+    border: none;
+}
+/********************  END FORMS TABLE ***********************************************/
