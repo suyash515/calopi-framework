@@ -13,12 +13,13 @@ if(isset($_REQUEST['action']))
 //                    $_REQUEST['database'], $_REQUEST['user'], $_REQUEST['password']);
 //            break;
 
-        case "generateStructure":
-            ApplicationGeneratorGuiUtility::generateApplication(RequestHelper::getRequestValue("directory"),
-                    RequestHelper::getRequestValue("host"), RequestHelper::getRequestValue("url"),
-                    RequestHelper::getRequestValue("database"), RequestHelper::getRequestValue("user"),
-                    RequestHelper::getRequestValue("password"));
-            break;
+	case "generateStructure":
+	    ApplicationGeneratorGuiUtility::generateApplication(RequestHelper::getRequestValue("directory"),
+		    RequestHelper::getRequestValue("host"), RequestHelper::getRequestValue("url"),
+		    RequestHelper::getRequestValue("database"), RequestHelper::getRequestValue("user"),
+		    RequestHelper::getRequestValue("password"), RequestHelper::getRequestValue("overwrite"),
+		    RequestHelper::getRequestValue("overwrite_folder"));
+	    break;
     }
 }
 else

@@ -13,27 +13,28 @@ class PHPFileWriterManager
      *
      * @param type $tableEntityList - Array of TableEntity objects
      */
-    public static function createPhpFiles($tableEntityList, ApplicationEntity $applicationEntity)
+    public static function createPhpFiles($tableEntityList, ApplicationEntity $applicationEntity, $overwrite)
     {
-	$phpWriterObjectArray = PHPFileWriterManager::initialisePhpFiles($tableEntityList, $applicationEntity);
+	$phpWriterObjectArray = PHPFileWriterManager::initialisePhpFiles($tableEntityList, $applicationEntity, $overwrite);
 	PHPFileWriterManager::createFiles($phpWriterObjectArray);
     }
 
-    private static function initialisePhpFiles($tableEntityList, ApplicationEntity $applicationEntity)
+    private static function initialisePhpFiles($tableEntityList, ApplicationEntity $applicationEntity, $overwrite)
     {
 	$phpFileWriterArray = array();
 	$phpBaseGuiClassFolder = FolderManager::getBaseGuiFolder();
-	$phpModelGuiClassFolder = FolderManager::getModelGuiFolder();
 	$phpBaseLogicClassFolder = FolderManager::getBaseLogicFolder();
-	$phpLogicClassFolder = FolderManager::getModelLogicFolder();
 	$phpBaseEntityClassFolder = FolderManager::getBaseEntityFolder();
-	$phpEntityClassFolder = FolderManager::getEntityFolder();
 	$phpBaseValidatorClassFolder = FolderManager::getBaseValidatorFolder();
+
+	$phpModelGuiClassFolder = FolderManager::getModelGuiFolder();
+	$phpEntityClassFolder = FolderManager::getEntityFolder();
 	$phpManagerClassFolder = FolderManager::getManagerFolder();
 	$phpConfigurationClassFolder = FolderManager::getConfigurationFolder();
 	$phpAutoloadClassFolder = FolderManager::getAutoloadFolder();
 	$phpProcessClassFolder = FolderManager::getProcessFolder();
 	$phpGuiNavigationClassFolder = FolderManager::getGuiNavigationFolder();
+	$phpLogicClassFolder = FolderManager::getModelLogicFolder();
 
 	for($i = 0; $i < count($tableEntityList); $i++)
 	{
@@ -65,10 +66,11 @@ class PHPFileWriterManager
 		    $tableEntityList[$i]);
 	    $phpFileWriterArray[count($phpFileWriterArray)] = new BaseEntityPhpFileWriter($phpBaseEntityClassFolder,
 		    $baseEntityFileName, $tableEntityList[$i]);
-	    $phpFileWriterArray[count($phpFileWriterArray)] = new EntityPhpFileWriter($phpEntityClassFolder, $entityFileName,
-		    $tableEntityList[$i]);
 	    $phpFileWriterArray[count($phpFileWriterArray)] = new BaseValidatorPHPFileWriter($phpBaseValidatorClassFolder,
 		    $baseValidatorFileName, $tableEntityList[$i]);
+
+	    $phpFileWriterArray[count($phpFileWriterArray)] = new EntityPhpFileWriter($phpEntityClassFolder, $entityFileName,
+		    $tableEntityList[$i]);
 	    $phpFileWriterArray[count($phpFileWriterArray)] = new ManagerPHPFileWriter($phpManagerClassFolder,
 		    $managerFileName, $tableEntityList[$i]);
 	    $phpFileWriterArray[count($phpFileWriterArray)] = new ModuleListPagePHPFileWriter($phpModulePageFolder,
@@ -90,18 +92,21 @@ class PHPFileWriterManager
 	$navigationFileName = PHPFileWriterManager::getNavigationFileName();
 	$bootstrapNavigationFileName = PHPFileWriterManager::getBootstrapNavigationFileName();
 
-	$phpFileWriterArray[count($phpFileWriterArray)] = new ConfigurationPHPFileWriter($phpConfigurationClassFolder,
-		$configurationFileName, $applicationEntity);
-	$phpFileWriterArray[count($phpFileWriterArray)] = new AutoloadPHPFileWriter($phpAutoloadClassFolder, $autoloadFileName,
-		$applicationEntity);
-	$phpFileWriterArray[count($phpFileWriterArray)] = new ProcessPHPFileWriter($phpProcessClassFolder, $processFileName,
-		$applicationEntity, $tableEntityList);
-	$phpFileWriterArray[count($phpFileWriterArray)] = new PageTitlePHPFileWriter($phpGuiNavigationClassFolder,
-		$pageTitleFileName, $tableEntityList);
-	$phpFileWriterArray[count($phpFileWriterArray)] = new NavigationPHPFileWriter($phpGuiNavigationClassFolder,
-		$navigationFileName, $tableEntityList);
-	$phpFileWriterArray[count($phpFileWriterArray)] = new BootstrapNavigationPHPFileWriter($phpGuiNavigationClassFolder,
-		$bootstrapNavigationFileName, $tableEntityList);
+	if(!$overwrite)
+	{
+	    $phpFileWriterArray[count($phpFileWriterArray)] = new ConfigurationPHPFileWriter($phpConfigurationClassFolder,
+		    $configurationFileName, $applicationEntity);
+	    $phpFileWriterArray[count($phpFileWriterArray)] = new AutoloadPHPFileWriter($phpAutoloadClassFolder,
+		    $autoloadFileName, $applicationEntity);
+	    $phpFileWriterArray[count($phpFileWriterArray)] = new ProcessPHPFileWriter($phpProcessClassFolder,
+		    $processFileName, $applicationEntity, $tableEntityList);
+	    $phpFileWriterArray[count($phpFileWriterArray)] = new PageTitlePHPFileWriter($phpGuiNavigationClassFolder,
+		    $pageTitleFileName, $tableEntityList);
+	    $phpFileWriterArray[count($phpFileWriterArray)] = new NavigationPHPFileWriter($phpGuiNavigationClassFolder,
+		    $navigationFileName, $tableEntityList);
+	    $phpFileWriterArray[count($phpFileWriterArray)] = new BootstrapNavigationPHPFileWriter($phpGuiNavigationClassFolder,
+		    $bootstrapNavigationFileName, $tableEntityList);
+	}
 
 	return $phpFileWriterArray;
     }

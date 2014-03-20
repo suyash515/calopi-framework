@@ -15,6 +15,7 @@ class Configuration
     //
     //directories
     public static $FRAMEWORK_TEMPLATE_DIRECTORY = "application_template_bootstrap";
+    public static $FRAMEWORK_TEMPLATE_DIRECTORY_EMPTY = "application_template_bootstrap_empty";
     //
     //generation information settings
     public static $ECHO_CONTENTS = false;
@@ -118,9 +119,23 @@ class Configuration
 	return $defaultDirectory;
     }
 
+    public static function getDefaultOverwrite()
+    {
+	$s = DIRECTORY_SEPARATOR;
+
+	$defaultDirectory = $s."opt".$s."lampp".$s."htdocs".$s."applications".$s;
+
+	return $defaultDirectory;
+    }
+
     public static function getFrameworkTemplateDirectory()
     {
 	return Configuration::$FRAMEWORK_TEMPLATE_DIRECTORY.DIRECTORY_SEPARATOR;
+    }
+
+    public static function getEmptyFrameworkTemplateDirectory()
+    {
+	return Configuration::$FRAMEWORK_TEMPLATE_DIRECTORY_EMPTY.DIRECTORY_SEPARATOR;
     }
 }
 

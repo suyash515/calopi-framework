@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * Description of FileWriterManager
  *
@@ -12,12 +13,11 @@ class FileWriterManager
      *
      * @param type $tableEntityList - Array of TableEntity objects
      */
-    public static function writeFiles($tableEntityList, ApplicationEntity $applicationEntity)
+    public static function writeFiles($tableEntityList, ApplicationEntity $applicationEntity, $overwrite)
     {
-        PHPFileWriterManager::createPhpFiles($tableEntityList, $applicationEntity);
-        JavascriptFileWriterManager::createJavascriptFiles($tableEntityList, $applicationEntity);
+	PHPFileWriterManager::createPhpFiles($tableEntityList, $applicationEntity, $overwrite);
+	JavascriptFileWriterManager::createJavascriptFiles($tableEntityList, $applicationEntity);
     }
-
 }
 
 ?>
