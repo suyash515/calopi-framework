@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * Description of Configuration
  *
@@ -9,7 +10,8 @@ class Configuration
 {
 
     //project settings
-    public static $DEFAULT_URL = "http://localhost/applications/svn/google-code/generator";
+    public static $DEFAULT_URL = "http://localhost/applications/test";
+    public static $VERSION = 1;
     //
     //directories
     public static $FRAMEWORK_TEMPLATE_DIRECTORY = "application_template_bootstrap";
@@ -76,10 +78,21 @@ class Configuration
     //
     //class names
     public static $CONFIGURATION_CLASS_NAME = "Configuration";
-    public static $PAGE_TITLE_FILE_NAME  = "PageTitle";
-    public static $NAVIGATION_FILE_NAME  = "Navigation";
-    public static $BOOTSTRAP_NAVIGATION_FILE_NAME  = "BootstrapNavigation";
+    public static $PAGE_TITLE_FILE_NAME = "PageTitle";
+    public static $NAVIGATION_FILE_NAME = "Navigation";
+    public static $BOOTSTRAP_NAVIGATION_FILE_NAME = "BootstrapNavigation";
     //
+    //file names
+    public static $ENTITY_LIST_SUFFIX = "List";
+    public static $ENTITY_ADD_PREFIX = "add";
+    public static $ENTITY_ADD_SUFFIX = "Processor";
+    public static $ENTITY_EDIT_PREFIX = "edit";
+    public static $ENTITY_EDIT_SUFFIX = "Processor";
+    //
+    //page titles
+    public static $ENTITY_TITLE_ADD_PREFIX = "Add";
+    public static $ENTITY_TITLE_EDIT_PREFIX = "Edit";
+    public static $ENTITY_TITLE_LIST_SUFFIX = "List";
     //autoload
     public static $AUTOLOAD_TEXT_REPLACEMENT_DIRECTORY = "#enter_directory_here";
     public static $AUTOLOAD_FILE_NAME = "autoload";
@@ -90,21 +103,24 @@ class Configuration
     //
     //javascript
     public static $JAVASCRIPT_FILE_NAME = "script";
+    //
+    //php function names
+    public static $GET_SPECIFIC_DETAILS_FUNCTION_NAME = "getSpecificDetails";
+    public static $UPDATE_SPECIFIC_FIELD_FUNCTION_NAME = "updateSpecificField";
 
     public static function getDefaultDirectory()
     {
-        $s = DIRECTORY_SEPARATOR;
+	$s = DIRECTORY_SEPARATOR;
 
-        $defaultDirectory = $s."opt".$s."lampp".$s."htdocs".$s."applications".$s."test".$s;
+	$defaultDirectory = $s."opt".$s."lampp".$s."htdocs".$s."applications".$s."test".$s;
 
-        return $defaultDirectory;
+	return $defaultDirectory;
     }
 
     public static function getFrameworkTemplateDirectory()
     {
-        return Configuration::$FRAMEWORK_TEMPLATE_DIRECTORY.DIRECTORY_SEPARATOR;
+	return Configuration::$FRAMEWORK_TEMPLATE_DIRECTORY.DIRECTORY_SEPARATOR;
     }
-
 }
 
 ?>

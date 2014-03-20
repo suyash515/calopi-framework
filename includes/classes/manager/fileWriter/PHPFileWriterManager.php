@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * Description of PHPFileWriterManager
  *
@@ -14,163 +15,228 @@ class PHPFileWriterManager
      */
     public static function createPhpFiles($tableEntityList, ApplicationEntity $applicationEntity)
     {
-        $phpWriterObjectArray = PHPFileWriterManager::initialisePhpFiles($tableEntityList, $applicationEntity);
-        PHPFileWriterManager::createFiles($phpWriterObjectArray);
+	$phpWriterObjectArray = PHPFileWriterManager::initialisePhpFiles($tableEntityList, $applicationEntity);
+	PHPFileWriterManager::createFiles($phpWriterObjectArray);
     }
 
     private static function initialisePhpFiles($tableEntityList, ApplicationEntity $applicationEntity)
     {
-        $phpFileWriterArray = array();
-        $phpBaseGuiClassFolder = FolderManager::getBaseGuiFolder();
-        $phpModelGuiClassFolder = FolderManager::getModelGuiFolder();
-        $phpBaseLogicClassFolder = FolderManager::getBaseLogicFolder();
-        $phpLogicClassFolder = FolderManager::getModelLogicFolder();
-        $phpBaseEntityClassFolder = FolderManager::getBaseEntityFolder();
-        $phpBaseValidatorClassFolder = FolderManager::getBaseValidatorFolder();
-        $phpConfigurationClassFolder = FolderManager::getConfigurationFolder();
-        $phpAutoloadClassFolder = FolderManager::getAutoloadFolder();
-        $phpProcessClassFolder = FolderManager::getProcessFolder();
-        $phpGuiNavigationClassFolder = FolderManager::getGuiNavigationFolder();
+	$phpFileWriterArray = array();
+	$phpBaseGuiClassFolder = FolderManager::getBaseGuiFolder();
+	$phpModelGuiClassFolder = FolderManager::getModelGuiFolder();
+	$phpBaseLogicClassFolder = FolderManager::getBaseLogicFolder();
+	$phpLogicClassFolder = FolderManager::getModelLogicFolder();
+	$phpBaseEntityClassFolder = FolderManager::getBaseEntityFolder();
+	$phpEntityClassFolder = FolderManager::getEntityFolder();
+	$phpBaseValidatorClassFolder = FolderManager::getBaseValidatorFolder();
+	$phpConfigurationClassFolder = FolderManager::getConfigurationFolder();
+	$phpAutoloadClassFolder = FolderManager::getAutoloadFolder();
+	$phpProcessClassFolder = FolderManager::getProcessFolder();
+	$phpGuiNavigationClassFolder = FolderManager::getGuiNavigationFolder();
 
-        for($i = 0; $i < count($tableEntityList); $i++)
-        {
-            $tableName = $tableEntityList[$i]->getTableName();
+	for($i = 0; $i < count($tableEntityList); $i++)
+	{
+	    $tableName = $tableEntityList[$i]->getTableName();
 
-            $baseGuiFileName = PHPFileWriterManager::getBaseGuiName($tableName);
-            $guiFileName = PHPFileWriterManager::getGuiName($tableName);
-            $baseLogicFileName = PHPFileWriterManager::getBaseLogicName($tableName);
-            $logicFileName = PHPFileWriterManager::getLogicName($tableName);
-            $baseEntityFileName = PHPFileWriterManager::getBaseEntityName($tableName);
-            $baseValidatorFileName = PHPFileWriterManager::getValidatorName($tableName);
-            $phpModulePageFileName = PHPFileWriterManager::getModulePageName($tableName);
+	    $baseGuiFileName = PHPFileWriterManager::getBaseGuiName($tableName);
+	    $guiFileName = PHPFileWriterManager::getGuiName($tableName);
+	    $baseLogicFileName = PHPFileWriterManager::getBaseLogicName($tableName);
+	    $logicFileName = PHPFileWriterManager::getLogicName($tableName);
+	    $baseEntityFileName = PHPFileWriterManager::getBaseEntityName($tableName);
+	    $entityFileName = PHPFileWriterManager::getEntityName($tableName);
+	    $baseValidatorFileName = PHPFileWriterManager::getValidatorName($tableName);
+	    $phpModuleListPageFileName = PHPFileWriterManager::getModuleListPageName($tableName);
+	    $phpModuleAddPageFileName = PHPFileWriterManager::getModuleAddPageName($tableName);
+	    $phpModuleAddProcessorPageFileName = PHPFileWriterManager::getModuleAddProcessorPageName($tableName);
+	    $phpModuleEditPageFileName = PHPFileWriterManager::getModuleEditPageName($tableName);
+	    $phpModuleEditProcessorPageFileName = PHPFileWriterManager::getModuleEditProcessorPageName($tableName);
 
-            $phpModulePageFolder = FolderManager::getModulePageFolder($tableName);
+	    $phpModulePageFolder = FolderManager::getModulePageFolder($tableName);
 
-            $phpFileWriterArray[count($phpFileWriterArray)] = new BaseGuiPHPFileWriter($phpBaseGuiClassFolder, $baseGuiFileName, $tableEntityList[$i]);
-            $phpFileWriterArray[count($phpFileWriterArray)] = new GuiPHPFileWriter($phpModelGuiClassFolder, $guiFileName, $tableEntityList[$i]);
-            $phpFileWriterArray[count($phpFileWriterArray)] = new BaseLogicPHPFileWriter($phpBaseLogicClassFolder, $baseLogicFileName, $tableEntityList[$i]);
-            $phpFileWriterArray[count($phpFileWriterArray)] = new LogicPHPFileWriter($phpLogicClassFolder, $logicFileName, $tableEntityList[$i]);
-            $phpFileWriterArray[count($phpFileWriterArray)] = new BaseEntityPhpFileWriter($phpBaseEntityClassFolder, $baseEntityFileName, $tableEntityList[$i]);
-            $phpFileWriterArray[count($phpFileWriterArray)] = new BaseValidatorPHPFileWriter($phpBaseValidatorClassFolder, $baseValidatorFileName, $tableEntityList[$i]);
-            $phpFileWriterArray[count($phpFileWriterArray)] = new ModulePagePHPFileWriter($phpModulePageFolder, $phpModulePageFileName, $tableEntityList[$i]);
-        }
+	    $phpFileWriterArray[count($phpFileWriterArray)] = new BaseGuiPHPFileWriter($phpBaseGuiClassFolder,
+		    $baseGuiFileName, $tableEntityList[$i]);
+	    $phpFileWriterArray[count($phpFileWriterArray)] = new GuiPHPFileWriter($phpModelGuiClassFolder, $guiFileName,
+		    $tableEntityList[$i]);
+	    $phpFileWriterArray[count($phpFileWriterArray)] = new BaseLogicPHPFileWriter($phpBaseLogicClassFolder,
+		    $baseLogicFileName, $tableEntityList[$i]);
+	    $phpFileWriterArray[count($phpFileWriterArray)] = new LogicPHPFileWriter($phpLogicClassFolder, $logicFileName,
+		    $tableEntityList[$i]);
+	    $phpFileWriterArray[count($phpFileWriterArray)] = new BaseEntityPhpFileWriter($phpBaseEntityClassFolder,
+		    $baseEntityFileName, $tableEntityList[$i]);
+	    $phpFileWriterArray[count($phpFileWriterArray)] = new EntityPhpFileWriter($phpEntityClassFolder, $entityFileName,
+		    $tableEntityList[$i]);
+	    $phpFileWriterArray[count($phpFileWriterArray)] = new BaseValidatorPHPFileWriter($phpBaseValidatorClassFolder,
+		    $baseValidatorFileName, $tableEntityList[$i]);
+	    $phpFileWriterArray[count($phpFileWriterArray)] = new ModuleListPagePHPFileWriter($phpModulePageFolder,
+		    $phpModuleListPageFileName, $tableEntityList[$i]);
+	    $phpFileWriterArray[count($phpFileWriterArray)] = new ModuleAddPagePHPFileWriter($phpModulePageFolder,
+		    $phpModuleAddPageFileName, $tableEntityList[$i]);
+	    $phpFileWriterArray[count($phpFileWriterArray)] = new ModuleAddProcessorPagePHPFileWriter($phpModulePageFolder,
+		    $phpModuleAddProcessorPageFileName, $tableEntityList[$i]);
+	    $phpFileWriterArray[count($phpFileWriterArray)] = new ModuleEditPagePHPFileWriter($phpModulePageFolder,
+		    $phpModuleEditPageFileName, $tableEntityList[$i]);
+	    $phpFileWriterArray[count($phpFileWriterArray)] = new ModuleEditProcessorPagePHPFileWriter($phpModulePageFolder,
+		    $phpModuleEditProcessorPageFileName, $tableEntityList[$i]);
+	}
 
-        $configurationFileName = PHPFileWriterManager::getConfigurationName();
-        $autoloadFileName = PHPFileWriterManager::getAutoloadFileName();
-        $processFileName = PHPFileWriterManager::getProcessFileName();
-        $pageTitleFileName = PHPFileWriterManager::getPageTitleFileName();
-        $navigationFileName = PHPFileWriterManager::getNavigationFileName();
-        $bootstrapNavigationFileName = PHPFileWriterManager::getBootstrapNavigationFileName();
+	$configurationFileName = PHPFileWriterManager::getConfigurationName();
+	$autoloadFileName = PHPFileWriterManager::getAutoloadFileName();
+	$processFileName = PHPFileWriterManager::getProcessFileName();
+	$pageTitleFileName = PHPFileWriterManager::getPageTitleFileName();
+	$navigationFileName = PHPFileWriterManager::getNavigationFileName();
+	$bootstrapNavigationFileName = PHPFileWriterManager::getBootstrapNavigationFileName();
 
-        $phpFileWriterArray[count($phpFileWriterArray)] = new ConfigurationPHPFileWriter($phpConfigurationClassFolder, $configurationFileName, $applicationEntity);
-        $phpFileWriterArray[count($phpFileWriterArray)] = new AutoloadPHPFileWriter($phpAutoloadClassFolder, $autoloadFileName, $applicationEntity);
-        $phpFileWriterArray[count($phpFileWriterArray)] = new ProcessPHPFileWriter($phpProcessClassFolder, $processFileName, $applicationEntity, $tableEntityList);
-        $phpFileWriterArray[count($phpFileWriterArray)] = new PageTitlePHPFileWriter($phpGuiNavigationClassFolder, $pageTitleFileName, $tableEntityList);
-        $phpFileWriterArray[count($phpFileWriterArray)] = new NavigationPHPFileWriter($phpGuiNavigationClassFolder, $navigationFileName, $tableEntityList);
-        $phpFileWriterArray[count($phpFileWriterArray)] = new BootstrapNavigationPHPFileWriter($phpGuiNavigationClassFolder, $bootstrapNavigationFileName, $tableEntityList);
+	$phpFileWriterArray[count($phpFileWriterArray)] = new ConfigurationPHPFileWriter($phpConfigurationClassFolder,
+		$configurationFileName, $applicationEntity);
+	$phpFileWriterArray[count($phpFileWriterArray)] = new AutoloadPHPFileWriter($phpAutoloadClassFolder, $autoloadFileName,
+		$applicationEntity);
+	$phpFileWriterArray[count($phpFileWriterArray)] = new ProcessPHPFileWriter($phpProcessClassFolder, $processFileName,
+		$applicationEntity, $tableEntityList);
+	$phpFileWriterArray[count($phpFileWriterArray)] = new PageTitlePHPFileWriter($phpGuiNavigationClassFolder,
+		$pageTitleFileName, $tableEntityList);
+	$phpFileWriterArray[count($phpFileWriterArray)] = new NavigationPHPFileWriter($phpGuiNavigationClassFolder,
+		$navigationFileName, $tableEntityList);
+	$phpFileWriterArray[count($phpFileWriterArray)] = new BootstrapNavigationPHPFileWriter($phpGuiNavigationClassFolder,
+		$bootstrapNavigationFileName, $tableEntityList);
 
-        return $phpFileWriterArray;
+	return $phpFileWriterArray;
     }
 
     private static function createFiles($phpFileWriterArray)
     {
-        for($i = 0; $i < count($phpFileWriterArray); $i++)
-        {
-            $phpFileWriterArray[$i]->createFile();
-        }
+	for($i = 0; $i < count($phpFileWriterArray); $i++)
+	{
+	    $phpFileWriterArray[$i]->createFile();
+	}
     }
 
     public static function getBaseGuiName($tableName)
     {
-        $fileName = TextUtility::formatFileName($tableName);
+	$fileName = TextUtility::formatFileName($tableName);
 
-        $fileName = Configuration::$BASE_SUFFIX.$fileName.Configuration::$GUI_SUFFIX;
+	$fileName = Configuration::$BASE_SUFFIX.$fileName.Configuration::$GUI_SUFFIX;
 
-        return $fileName;
+	return $fileName;
     }
 
     public static function getGuiName($tableName)
     {
-        $fileName = TextUtility::formatFileName($tableName);
+	$fileName = TextUtility::formatFileName($tableName);
 
-        $fileName = $fileName.Configuration::$GUI_SUFFIX;
+	$fileName = $fileName.Configuration::$GUI_SUFFIX;
 
-        return $fileName;
+	return $fileName;
     }
 
     public static function getBaseLogicName($tableName)
     {
-        $fileName = TextUtility::formatFileName($tableName);
+	$fileName = TextUtility::formatFileName($tableName);
 
-        $fileName = Configuration::$BASE_SUFFIX.$fileName.Configuration::$LOGIC_SUFFIX;
+	$fileName = Configuration::$BASE_SUFFIX.$fileName.Configuration::$LOGIC_SUFFIX;
 
-        return $fileName;
+	return $fileName;
     }
 
     public static function getLogicName($tableName)
     {
-        $fileName = TextUtility::formatFileName($tableName);
+	$fileName = TextUtility::formatFileName($tableName);
 
-        $fileName = $fileName.Configuration::$LOGIC_SUFFIX;
+	$fileName = $fileName.Configuration::$LOGIC_SUFFIX;
 
-        return $fileName;
+	return $fileName;
     }
 
     public static function getBaseEntityName($tableName)
     {
-        $fileName = TextUtility::formatFileName($tableName);
+	$fileName = TextUtility::formatFileName($tableName);
 
-        $fileName = Configuration::$BASE_SUFFIX.$fileName.Configuration::$ENTITY_SUFFIX;
+	$fileName = Configuration::$BASE_SUFFIX.$fileName.Configuration::$ENTITY_SUFFIX;
 
-        return $fileName;
+	return $fileName;
+    }
+
+    public static function getEntityName($tableName)
+    {
+	$fileName = TextUtility::formatFileName($tableName);
+
+	$fileName = $fileName.Configuration::$ENTITY_SUFFIX;
+
+	return $fileName;
     }
 
     public static function getValidatorName($tableName)
     {
-        $fileName = TextUtility::formatFileName($tableName);
+	$fileName = TextUtility::formatFileName($tableName);
 
-        $fileName = Configuration::$BASE_SUFFIX.$fileName.Configuration::$VALIDATOR_SUFFIX;
+	$fileName = Configuration::$BASE_SUFFIX.$fileName.Configuration::$VALIDATOR_SUFFIX;
 
-        return $fileName;
+	return $fileName;
     }
 
-    public static function getModulePageName($tableName)
+    public static function getModuleListPageName($tableName)
     {
-        $fileName = TextUtility::formatVariableName($tableName);
+	$fileName = TextUtility::formatVariableName($tableName).Configuration::$ENTITY_LIST_SUFFIX;
 
-        return $fileName;
+	return $fileName;
+    }
+
+    public static function getModuleAddPageName($tableName)
+    {
+	$fileName = Configuration::$ENTITY_ADD_PREFIX.TextUtility::formatVariableNameWithFirstLetterCapitalised($tableName);
+
+	return $fileName;
+    }
+
+    public static function getModuleAddProcessorPageName($tableName)
+    {
+	$fileName = Configuration::$ENTITY_ADD_PREFIX.TextUtility::formatVariableNameWithFirstLetterCapitalised($tableName).Configuration::$ENTITY_ADD_SUFFIX;
+
+	return $fileName;
+    }
+
+    public static function getModuleEditPageName($tableName)
+    {
+	$fileName = Configuration::$ENTITY_EDIT_PREFIX.TextUtility::formatVariableNameWithFirstLetterCapitalised($tableName);
+
+	return $fileName;
+    }
+
+    public static function getModuleEditProcessorPageName($tableName)
+    {
+	$fileName = Configuration::$ENTITY_EDIT_PREFIX.TextUtility::formatVariableNameWithFirstLetterCapitalised($tableName).Configuration::$ENTITY_EDIT_SUFFIX;
+
+	return $fileName;
     }
 
     public static function getAutoloadFileName()
     {
-        return Configuration::$AUTOLOAD_FILE_NAME;
+	return Configuration::$AUTOLOAD_FILE_NAME;
     }
 
     public static function getProcessFileName()
     {
-        return Configuration::$PROCESS_FILE_NAME;
+	return Configuration::$PROCESS_FILE_NAME;
     }
 
     public static function getPageTitleFileName()
     {
-        return Configuration::$PAGE_TITLE_FILE_NAME;
+	return Configuration::$PAGE_TITLE_FILE_NAME;
     }
 
     public static function getNavigationFileName()
     {
-        return Configuration::$NAVIGATION_FILE_NAME;
+	return Configuration::$NAVIGATION_FILE_NAME;
     }
 
     public static function getBootstrapNavigationFileName()
     {
-        return Configuration::$BOOTSTRAP_NAVIGATION_FILE_NAME;
+	return Configuration::$BOOTSTRAP_NAVIGATION_FILE_NAME;
     }
 
     public static function getConfigurationName()
     {
-        return Configuration::$CONFIGURATION_CLASS_NAME;
+	return Configuration::$CONFIGURATION_CLASS_NAME;
     }
-
 }
 
 ?>

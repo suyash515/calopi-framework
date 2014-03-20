@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * Description of GenericFileWriter
  *
@@ -27,102 +28,112 @@ abstract class GenericFileWriter
 
     protected function initialise($folder, $fileName, $extension)
     {
-        $this->folder = $folder;
-        $this->fileName = $fileName;
-        $this->extension = $extension;
+	$this->folder = $folder;
+	$this->fileName = $fileName;
+	$this->extension = $extension;
 
-        $this->indentation = 0;
+	$this->indentation = 0;
     }
 
     protected function indent()
     {
-        $this->indentation++;
+	$this->indentation++;
     }
 
     protected function unIndent()
     {
-        if($this->indentation > 0)
-        {
-            $this->indentation--;
-        }
+	if($this->indentation > 0)
+	{
+	    $this->indentation--;
+	}
     }
 
     protected function addIndentation()
     {
-        for($i = 0; $i < $this->indentation; $i++)
-        {
-            $this->contents .= "\t";
-        }
+	for($i = 0; $i < $this->indentation; $i++)
+	{
+	    $this->contents .= "    ";
+	}
     }
 
     protected function addEmptyLine($numberOfEmtptyLines = 1)
     {
-        for($i = 0; $i < $numberOfEmtptyLines; $i++)
-        {
-            $this->contents .= "\n";
-        }
+	for($i = 0; $i < $numberOfEmtptyLines; $i++)
+	{
+	    $this->contents .= "\n";
+	}
+    }
+
+    protected function addOutputContent($content)
+    {
+	$formattedContent = addcslashes($content, '"');
+	$this->addContent("\$output .= \"$formattedContent\";");
     }
 
     protected function addContent($text, $addNewLine = true)
     {
-        $this->addIndentation();
-        $this->contents .= $text;
+	$this->addIndentation();
+	$this->contents .= $text;
 
-        if($addNewLine)
-        {
-            $this->addEmptyLine();
-        }
+	if($addNewLine)
+	{
+	    $this->addEmptyLine();
+	}
+    }
+
+    protected function addReturnOutput()
+    {
+	$this->addContent("return \$output;");
     }
 
     protected function openCurly()
     {
-        $this->addContent("{");
-        $this->indent();
+	$this->addContent("{");
+	$this->indent();
     }
 
     protected function closeCurly()
     {
-        $this->unIndent();
-        $this->addContent("}");
+	$this->unIndent();
+	$this->addContent("}");
     }
 
     public function createFile()
     {
-        $this->openFile();
+	$this->openFile();
     }
 
     protected function openFile()
     {
-        $fullFileName = $this->getFullFileName();
+	$fullFileName = $this->getFullFileName();
 
-        $handle = fopen($fullFileName, 'w');
+	$handle = fopen($fullFileName, 'w');
 
-        fwrite($handle, $this->contents);
+	fwrite($handle, $this->contents);
     }
 
     public function replaceContents()
     {
-        $fullFileName = $this->getFullFileName();
+	$fullFileName = $this->getFullFileName();
 
-        file_put_contents($fullFileName, $this->contents);
+	file_put_contents($fullFileName, $this->contents);
     }
 
     protected function getFullFileName()
     {
-        $lastCharacter = substr($this->folder, strlen($this->folder) - 1, 1);
+	$lastCharacter = substr($this->folder, strlen($this->folder) - 1, 1);
 
-        if($lastCharacter == DIRECTORY_SEPARATOR)
-        {
-            $fullFileName = $this->folder.$this->fileName.".".$this->extension;
-        }
-        else
-        {
-            $fullFileName = $this->folder.DIRECTORY_SEPARATOR.$this->fileName.".".$this->extension;
-        }
+	if($lastCharacter == DIRECTORY_SEPARATOR)
+	{
+	    $fullFileName = $this->folder.$this->fileName.".".$this->extension;
+	}
+	else
+	{
+	    $fullFileName = $this->folder.DIRECTORY_SEPARATOR.$this->fileName.".".$this->extension;
+	}
 
-        return $fullFileName;
+	return $fullFileName;
     }
-
 }
 
 ?>

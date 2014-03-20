@@ -52,7 +52,15 @@ class QueryJoin
         }
 
         $query .= " ON ";
-        $query .= " $this->leftTable.$this->leftField = $this->rightTable.$this->rightField";
+
+        if($this->tableAlias != "")
+        {
+            $query .= " $this->leftTable.$this->leftField = $this->tableAlias.$this->rightField";
+        }
+        else
+        {
+            $query .= " $this->leftTable.$this->leftField = $this->rightTable.$this->rightField";
+        }
 
         if(count($this->andCondition) > 0)
         {

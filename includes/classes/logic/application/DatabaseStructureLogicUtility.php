@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * Description of DatabaseStructureLogicUtility
  *
@@ -10,47 +11,46 @@ class DatabaseStructureLogicUtility
 
     public static function getDatabaseStructure(ApplicationEntity $applicationEntity)
     {
-        $databaseEntity = $applicationEntity->getDatabaseEntity();
-        
-        $db = new DBQuery($databaseEntity->getConnectionParamaters(), true);
+	$databaseEntity = $applicationEntity->getDatabaseEntity();
 
-        $query = "SHOW TABLES";
-        $result = $db->executeQuery($query);
+	$db = new DBQuery($databaseEntity->getConnectionParamaters(), true);
 
-        $objectArray = DatabaseStructureLogicUtility::convertToObjectArray($result, $databaseEntity->getDatabase());
+	$query = "SHOW TABLES";
+	$result = $db->executeQuery($query);
 
-        return $objectArray;
+	$objectArray = DatabaseStructureLogicUtility::convertToObjectArray($result, $databaseEntity->getDatabase());
+
+	return $objectArray;
     }
 
     public static function describeTable(TableEntity $tableEntity)
     {
-        $db = DBQuery::getInstance();
+	$db = DBQuery::getInstance();
 
-        $query = "DESCRIBE ".$tableEntity->getTableName();
-        $result = $db->executeQuery($query);
+	$query = "DESCRIBE ".$tableEntity->getTableName();
+	$result = $db->executeQuery($query);
 
-        $tableEntity->extractDetails($result);
+	$tableEntity->extractDetails($result);
     }
 
     private static function convertToObjectArray($result, $databaseName)
     {
-        $objectArray = array();
+	$objectArray = array();
 
-        for($i = 0; $i < count($result); $i++)
-        {
-            $objectArray[$i] = DatabaseStructureLogicUtility::convertToObject($result[$i], $databaseName);
-        }
+	for($i = 0; $i < count($result); $i++)
+	{
+	    $objectArray[$i] = DatabaseStructureLogicUtility::convertToObject($result[$i], $databaseName);
+	}
 
-        return $objectArray;
+	return $objectArray;
     }
 
     private static function convertToObject($resultDetails, $databaseName)
     {
-        $tableName = QueryBuilder::getQueryValue($resultDetails, "Tables_in_".$databaseName);
+	$tableName = QueryBuilder::getQueryValue($resultDetails, "Tables_in_".$databaseName);
 
-        return new TableEntity($tableName);
+	return new TableEntity($tableName);
     }
-
 }
 
 ?>

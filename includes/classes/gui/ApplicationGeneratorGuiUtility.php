@@ -2,6 +2,7 @@
 
 require_once './includes/classes/gui/utilities/FrameworkCopyGuiUtility.php';
 
+
 /**
  * Description of ApplicationGenerator
  *
@@ -12,26 +13,38 @@ class ApplicationGeneratorGuiUtility
 
     public static function generateApplication($directory, $host, $url, $database, $user, $password)
     {
-        $output = "";
+	$output = "";
 
-        $databaseEntity = new DatabaseEntity($host, $database, $user, $password);
-        $applicationEntity = new ApplicationEntity($directory, $url, $databaseEntity);
+	$databaseEntity = new DatabaseEntity($host, $database, $user, $password);
+	$applicationEntity = new ApplicationEntity($directory, $url, $databaseEntity);
 
-        $tableEntityList = DatabaseStructureManager::getDatabaseStructure($applicationEntity);
+	$tableEntityList = DatabaseStructureManager::getDatabaseStructure($applicationEntity);
 
-        FolderManager::initialiseDirectory($directory, $tableEntityList);
+	FolderManager::initialiseDirectory($directory, $tableEntityList);
 
-        UpdateManagerGuiUtility::addSection("Template Copy");
-        UpdateManagerGuiUtility::addUpdate("Template copy started");
-        ApplicationGeneratorGuiUtility::copyFrameworkTemplate($directory);
-        UpdateManagerGuiUtility::addUpdate("Template copy completed");
+	UpdateManagerGuiUtility::addSection("Template Copy");
+	UpdateManagerGuiUtility::addUpdate("Template copy started");
+	ApplicationGeneratorGuiUtility::copyFrameworkTemplate($directory);
+	UpdateManagerGuiUtility::addUpdate("Template copy completed");
 
-        UpdateManagerGuiUtility::addSection("File Generation");
-        UpdateManagerGuiUtility::addUpdate("File generation Started");
-        ApplicationGeneratorGuiUtility::generateFiles($applicationEntity, $tableEntityList);
-        UpdateManagerGuiUtility::addUpdate("File generation Completed");
+	UpdateManagerGuiUtility::addSection("File Generation");
+	UpdateManagerGuiUtility::addUpdate("File generation Started");
+	ApplicationGeneratorGuiUtility::generateFiles($applicationEntity, $tableEntityList);
+	UpdateManagerGuiUtility::addUpdate("File generation Completed");
 
-        return $output;
+	ApplicationGeneratorGuiUtility::changeFilePermissions($directory);
+
+	return $output;
+    }
+
+    private static function changeFilePermissions($directory)
+    {
+	$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($directory));
+
+	foreach($iterator as $item)
+	{
+	    chmod($item, 0777);
+	}
     }
 
     /**
@@ -39,24 +52,23 @@ class ApplicationGeneratorGuiUtility
      */
     private static function copyFrameworkTemplate($directory)
     {
-        $output = "";
+	$output = "";
 
-        $source = Configuration::getFrameworkTemplateDirectory();
+	$source = Configuration::getFrameworkTemplateDirectory();
 
-        FrameworkCopyGuiUtility::smartCopy($source, $directory);
+	FrameworkCopyGuiUtility::smartCopy($source, $directory);
 
-        return $output;
+	return $output;
     }
 
     private static function generateFiles(ApplicationEntity $applicationEntity, $tableEntityList)
     {
-        $output = "";
+	$output = "";
 
-        FileWriterManager::writeFiles($tableEntityList, $applicationEntity);
+	FileWriterManager::writeFiles($tableEntityList, $applicationEntity);
 
-        return $output;
+	return $output;
     }
-
 }
 
 ?>

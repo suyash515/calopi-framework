@@ -92,7 +92,7 @@ class BootstrapNavigationPHPFileWriter extends GenericPHPFileWriter
         for($i = 0; $i < count($this->tableEntityList); $i++)
         {
             $tableName = $this->tableEntityList[$i]->getTableName();
-            $url = PHPFileWriterManager::getModulePageName($tableName);
+            $url = PHPFileWriterManager::getModuleListPageName($tableName);
             $urlVariable = PHPFileWriter::createVariable(TextUtility::formatVariableName("url_".$tableName));
 
             $this->addContent("$urlVariable = UrlConfiguration::getUrl(\"$tableName\", \"$url\");");
@@ -108,7 +108,7 @@ class BootstrapNavigationPHPFileWriter extends GenericPHPFileWriter
         {
             $tableName = $this->tableEntityList[$i]->getTableName();
             $entityName = TextUtility::formatReadText($tableName);
-            $url = PHPFileWriterManager::getModulePageName($tableName);
+            $url = PHPFileWriterManager::getModuleListPageName($tableName);
             $urlVariable = PHPFileWriter::createVariable(TextUtility::formatVariableName("url_".$tableName));
             $variableName = PHPFileWriter::createVariable(TextUtility::formatVariableName($tableName."Selected"));
 

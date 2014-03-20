@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * Description of GenericPHPFileWriter
  *
@@ -8,97 +9,107 @@
 class GenericPHPFileWriter extends GenericFileWriter
 {
 
+    protected static $MODIFIER_PUBLIC = "public";
+    protected static $MODIFIER_PROTECTED = "protected";
+    protected static $MODIFIER_PRIVATE = "private";
+
     protected function appendPhpFileOpening()
     {
-        $this->addContent("<?php");
-        $this->addEmptyLine(2);
+	$this->addContent("<?php");
+	$this->addEmptyLine(1);
     }
 
     protected function appendPhpFileClosing()
     {
-        $this->addEmptyLine();
-        $this->addContent("?>");
+	$this->addEmptyLine();
+	$this->addContent("?>");
     }
 
     protected function appendClassStart($extendArray = array())
     {
-        if(count($extendArray) > 0)
-        {
-            $extendList = "";
+	if(count($extendArray) > 0)
+	{
+	    $extendList = "";
 
-            for($i = 0; $i < count($extendArray); $i++)
-            {
-                $extendList .= $extendArray[$i];
+	    for($i = 0; $i < count($extendArray); $i++)
+	    {
+		$extendList .= $extendArray[$i];
 
-                if($i < (count($extendArray) - 1))
-                {
-                    $extendList .= ", ";
-                }
-            }
+		if($i < (count($extendArray) - 1))
+		{
+		    $extendList .= ", ";
+		}
+	    }
 
-            $this->addContent("class ".$this->fileName." extends $extendList");
-        }
-        else
-        {
-            $this->addContent("class ".$this->fileName);
-        }
+	    $this->addContent("class ".$this->fileName." extends $extendList");
+	}
+	else
+	{
+	    $this->addContent("class ".$this->fileName);
+	}
 
-        $this->openCurly();
+	$this->openCurly();
     }
 
     protected function appendClassEnd()
     {
-        $this->closeCurly();
+	$this->closeCurly();
     }
 
     protected function addComment($comment)
     {
-        $this->addContent("//$comment");
+	$this->addContent("//$comment");
     }
 
     public function appendDefaultConstructor($parameterList = "")
     {
-        $this->addContent("public function __construct($parameterList)");
+	$this->addContent("public function __construct($parameterList)");
     }
 
     public static function createVariable($variableName)
     {
-        return "\$".$variableName;
+	return "\$".$variableName;
     }
 
     protected function appendFunctionDeclaration($functionName = "", $prefix = "", $suffix = "",
-            $staticFunction = false, $parameterString = "")
+	    $staticFunction = false, $parameterString = "", $functionModifier = "")
     {
-        $output = "";
+	$output = "";
 
-        if($functionName == "")
-        {
-            $functionName = TextUtility::formatToCamelCapitalised($this->tableEntity->getTableName());
-        }
+	if($functionName == "")
+	{
+	    $functionName = TextUtility::formatToCamelCapitalised($this->tableEntity->getTableName());
+	}
 
-        $output .= "public";
+	if($functionModifier == "")
+	{
+	    $output .= "public";
+	}
+	else
+	{
+	    $output .= $functionModifier;
+	}
 
-        if($staticFunction)
-        {
-            $output .= " static";
-        }
+	if($staticFunction)
+	{
+	    $output .= " static";
+	}
 
-        $output .= " function ";
+	$output .= " function ";
 
-        $output .= $prefix.$functionName.$suffix;
+	$output .= $prefix.$functionName.$suffix;
 
-        $output .= "(";
+	$output .= "(";
 
-        if($parameterString != "")
-        {
-            $output .= $parameterString;
-        }
+	if($parameterString != "")
+	{
+	    $output .= $parameterString;
+	}
 
-        $output .= ")";
+	$output .= ")";
 
-        $this->addContent($output);
+	$this->addContent($output);
     }
-
 }
 
 ?>
