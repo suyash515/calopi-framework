@@ -51,6 +51,7 @@
 /opt/lampp/htdocs/applications/git/calopi-framework/includes/classes/gui/fileGeneration/GuiPHPFileWriter.php
 /opt/lampp/htdocs/applications/git/calopi-framework/includes/classes/gui/fileGeneration/JavascriptFileWriter.php
 /opt/lampp/htdocs/applications/git/calopi-framework/includes/classes/gui/fileGeneration/LogicPHPFileWriter.php
+/opt/lampp/htdocs/applications/git/calopi-framework/includes/classes/gui/fileGeneration/ManagerPHPFileWriter.php
 /opt/lampp/htdocs/applications/git/calopi-framework/includes/classes/gui/fileGeneration/ModuleAddPagePHPFileWriter.php
 /opt/lampp/htdocs/applications/git/calopi-framework/includes/classes/gui/fileGeneration/ModuleAddProcessorPagePHPFileWriter.php
 /opt/lampp/htdocs/applications/git/calopi-framework/includes/classes/gui/fileGeneration/ModuleEditPagePHPFileWriter.php

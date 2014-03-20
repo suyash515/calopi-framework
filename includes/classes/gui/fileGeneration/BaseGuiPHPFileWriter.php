@@ -156,11 +156,9 @@ class BaseGuiPHPFileWriter extends PHPFileWriter
 	$this->appendFunctionDeclaration($addFunctionName, "", "", true, $parameterString);
 	$this->openCurly();
 
-	$validatorVariable = PHPFileWriter::createVariable(TextUtility::formatVariableName($tableName."Validator"));
+	$managerClassName = PHPFileWriterManager::getManagerName($tableName);
 
-	$validatorClassName = PHPFileWriterManager::getValidatorName($tableName);
-	$validateAddFunctionName = BaseValidatorPHPFileWriter::getValidateAddFunctionName($tableName);
-	$logicAddFunctionName = BaseLogicPHPFileWriter::getAddFunctionName($tableName);
+	$managerAddFunctionName = ManagerPHPFileWriter::getAddFunctionName($tableName);
 	$clearAddFunctionName = ScriptJavascriptFileWriter::getClearAddFunctionName($tableName);
 	$addCommandContainerId = BaseGuiPHPFileWriter::getAddCommandContainerId($tableName);
 	$javascriptReloadFunctionName = ScriptJavascriptFileWriter::getReloadListFunctionName($tableName);
@@ -168,22 +166,17 @@ class BaseGuiPHPFileWriter extends PHPFileWriter
 	$this->addContent("\$output = \"\";");
 	$this->addEmptyLine();
 
-	$this->addContent("$validatorVariable = new $validatorClassName();");
-
-	$this->addContent("\$error = $validatorVariable"."->$validateAddFunctionName($parameterString);");
+	$this->addContent("\$error = $managerClassName::$managerAddFunctionName($parameterString);");
 
 	$this->addEmptyLine();
 
-	$this->addContent("if(strlen(\$error->errorExists()))");
+	$this->addContent("if(\$error->errorExists())");
 	$this->openCurly();
-	$this->addContent("\$output .= ResultUpdateGuiUtility::getBootstrapErrorDisplay(\$error->getDivErrorList());");
+	$this->addContent("\$output .= \$error->getBoostrapError();");
 	$this->closeCurly();
 
 	$this->addContent("else");
 	$this->openCurly();
-	$this->addContent($this->fileName."::$logicAddFunctionName($parameterString);");
-
-	$this->addEmptyLine();
 	$this->addContent("\$resultMessage = \"\";");
 	$this->addContent("\$resultMessage .= \"<p>$entityName has been successfully saved.</p>\";");
 	$this->addContent("\$resultMessage .= \"<p>\";");
@@ -380,10 +373,8 @@ class BaseGuiPHPFileWriter extends PHPFileWriter
 	$entityName = TextUtility::formatReadText($this->tableEntity->getTableName());
 	$editFunctionName = BaseGuiPHPFileWriter::getEditFunctionName($tableName);
 
-	$validatorVariable = PHPFileWriter::createVariable(TextUtility::formatVariableName($tableName."Validator"));
-	$validatorClassName = PHPFileWriterManager::getValidatorName($tableName);
-	$validateEditFunctionName = BaseValidatorPHPFileWriter::getValidateEditFunctionName($tableName);
-	$logicEditFunctionName = BaseLogicPHPFileWriter::getUpdateFunctionName($tableName);
+	$managerClassName = PHPFileWriterManager::getManagerName($tableName);
+	$managerEditFunctionName = ManagerPHPFileWriter::getEditFunctionName($tableName);
 
 	$fieldEntityList = $this->tableEntity->getNonAutoParameterList();
 
@@ -396,21 +387,17 @@ class BaseGuiPHPFileWriter extends PHPFileWriter
 
 	$this->addEmptyLine();
 
-	$this->addContent("$validatorVariable = new $validatorClassName();");
-	$this->addContent("\$error = $validatorVariable"."->$validateEditFunctionName($parameterString);");
+	$this->addContent("\$error = $managerClassName::$managerEditFunctionName($parameterString);");
 
 	$this->addEmptyLine();
 
-	$this->addContent("if(strlen(\$error->errorExists()))");
+	$this->addContent("if(\$error->errorExists())");
 	$this->openCurly();
-	$this->addContent("\$output .= ResultUpdateGuiUtility::getBootstrapErrorDisplay(\$error->getDivErrorList());");
+	$this->addContent("\$output .= \$error->getBoostrapError();");
 	$this->closeCurly();
 
 	$this->addContent("else");
 	$this->openCurly();
-	$this->addContent($this->fileName."::$logicEditFunctionName($parameterString);");
-
-	$this->addEmptyLine();
 
 	$primaryKeyUnderscore = PHPFileWriter::createVariable($this->tableEntity->getUnderscoredPrimaryKey());
 
@@ -431,7 +418,7 @@ class BaseGuiPHPFileWriter extends PHPFileWriter
 
 	$this->addEmptyLine();
 
-//container ids for fields
+	//container ids for fields
 	for($i = 0; $i < count($fieldEntityList); $i++)
 	{
 	    $fieldEntity = $fieldEntityList[$i];
@@ -564,8 +551,10 @@ class BaseGuiPHPFileWriter extends PHPFileWriter
 
 	$primaryParameterString = $this->tableEntity->getPhpCommaPrimaryParameterList();
 	$deleteFunctionName = BaseGuiPHPFileWriter::getDeleteFunctionName($tableName);
-	$logicDeleteFunctionName = BaseLogicPHPFileWriter::getDeleteFunctionName($tableName);
 	$primaryKeyUnderscore = PHPFileWriter::createVariable($this->tableEntity->getUnderscoredPrimaryKey());
+
+	$managerClassName = PHPFileWriterManager::getManagerName($tableName);
+	$managerEditFunctionName = ManagerPHPFileWriter::getEditFunctionName($tableName);
 
 	$lineContainerIdVariable = PHPFileWriter::createVariable(TextUtility::formatVariableName($tableName)."LineContainerId");
 	$actionLineContainerIdVariable = PHPFileWriter::createVariable(TextUtility::formatVariableName($tableName)."ActionLineContainerId");
@@ -574,13 +563,12 @@ class BaseGuiPHPFileWriter extends PHPFileWriter
 	$actionLineContainerText = BaseGuiPHPFileWriter::getActionLineContainerId($tableName, $primaryKeyUnderscore);
 
 	$this->appendFunctionDeclaration($deleteFunctionName, "", "", true, $primaryParameterString);
-	$logicClassName = PHPFileWriterManager::getBaseLogicName($tableName);
 
 	$this->openCurly();
 
 	$this->addContent("\$output = \"\";");
 	$this->addEmptyLine();
-	$this->addContent("$logicClassName::$logicDeleteFunctionName($primaryParameterString);");
+	$this->addContent("$managerClassName::$managerEditFunctionName($primaryParameterString);");
 	$this->addEmptyLine();
 	$this->addContent("$lineContainerIdVariable = $lineContainerText;");
 	$this->addContent("$actionLineContainerIdVariable = $actionLineContainerText;");

@@ -244,6 +244,17 @@ class FolderManager
 
 	return $guiFolder;
     }
+
+    public static function getManagerFolder()
+    {
+	$classDirectory = FolderManager::getClassesFolder();
+
+	$s = DIRECTORY_SEPARATOR;
+
+	$guiFolder = $classDirectory.$s."manager";
+
+	return $guiFolder;
+    }
 }
 
 ?>

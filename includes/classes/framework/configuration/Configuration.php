@@ -25,6 +25,7 @@ class Configuration
     public static $ENTITY_SUFFIX = "Entity";
     public static $BASE_SUFFIX = "Base";
     public static $VALIDATOR_SUFFIX = "Validator";
+    public static $MANAGER_SUFFIX = "Manager";
     //
     //container field prefix/suffix
     public static $TEXTFIELD_PREFIX = "txt";

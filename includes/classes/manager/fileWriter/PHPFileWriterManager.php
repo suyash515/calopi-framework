@@ -29,6 +29,7 @@ class PHPFileWriterManager
 	$phpBaseEntityClassFolder = FolderManager::getBaseEntityFolder();
 	$phpEntityClassFolder = FolderManager::getEntityFolder();
 	$phpBaseValidatorClassFolder = FolderManager::getBaseValidatorFolder();
+	$phpManagerClassFolder = FolderManager::getManagerFolder();
 	$phpConfigurationClassFolder = FolderManager::getConfigurationFolder();
 	$phpAutoloadClassFolder = FolderManager::getAutoloadFolder();
 	$phpProcessClassFolder = FolderManager::getProcessFolder();
@@ -45,6 +46,7 @@ class PHPFileWriterManager
 	    $baseEntityFileName = PHPFileWriterManager::getBaseEntityName($tableName);
 	    $entityFileName = PHPFileWriterManager::getEntityName($tableName);
 	    $baseValidatorFileName = PHPFileWriterManager::getValidatorName($tableName);
+	    $managerFileName = PHPFileWriterManager::getManagerName($tableName);
 	    $phpModuleListPageFileName = PHPFileWriterManager::getModuleListPageName($tableName);
 	    $phpModuleAddPageFileName = PHPFileWriterManager::getModuleAddPageName($tableName);
 	    $phpModuleAddProcessorPageFileName = PHPFileWriterManager::getModuleAddProcessorPageName($tableName);
@@ -67,6 +69,8 @@ class PHPFileWriterManager
 		    $tableEntityList[$i]);
 	    $phpFileWriterArray[count($phpFileWriterArray)] = new BaseValidatorPHPFileWriter($phpBaseValidatorClassFolder,
 		    $baseValidatorFileName, $tableEntityList[$i]);
+	    $phpFileWriterArray[count($phpFileWriterArray)] = new ManagerPHPFileWriter($phpManagerClassFolder,
+		    $managerFileName, $tableEntityList[$i]);
 	    $phpFileWriterArray[count($phpFileWriterArray)] = new ModuleListPagePHPFileWriter($phpModulePageFolder,
 		    $phpModuleListPageFileName, $tableEntityList[$i]);
 	    $phpFileWriterArray[count($phpFileWriterArray)] = new ModuleAddPagePHPFileWriter($phpModulePageFolder,
@@ -169,6 +173,15 @@ class PHPFileWriterManager
 	$fileName = TextUtility::formatFileName($tableName);
 
 	$fileName = Configuration::$BASE_SUFFIX.$fileName.Configuration::$VALIDATOR_SUFFIX;
+
+	return $fileName;
+    }
+
+    public static function getManagerName($tableName)
+    {
+	$fileName = TextUtility::formatFileName($tableName);
+
+	$fileName = $fileName.Configuration::$MANAGER_SUFFIX;
 
 	return $fileName;
     }
