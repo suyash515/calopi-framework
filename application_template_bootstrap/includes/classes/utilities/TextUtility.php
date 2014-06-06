@@ -98,6 +98,56 @@ class TextUtility
 
 	return $output;
     }
+
+    public static function stringStartsWith($text, $startText)
+    {
+	if(strlen($text) > 0)
+	{
+	    if(substr($text, 0, 1) == $startText)
+	    {
+		return true;
+	    }
+	}
+
+	return false;
+    }
+
+    public static function formatNumber($number, $addCurrency = false)
+    {
+	$output = "";
+
+	$formattedNumber = number_format($number, 2, ".", ",");
+
+	if($addCurrency)
+	{
+	    $output = Configuration::$CURRENCY." ".$formattedNumber;
+	}
+	else
+	{
+	    $output = $formattedNumber;
+	}
+
+	return $output;
+    }
+
+    public static function getFileExtension($fileName)
+    {
+	$ext = end(explode(".", $fileName));
+
+	return $ext;
+    }
+
+    public static function isStringEmpty($str)
+    {
+	if(strlen(trim($str)) == 0)
+	{
+	    return true;
+	}
+	else
+	{
+	    return false;
+	}
+    }
 }
 
 ?>
