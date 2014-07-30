@@ -25,8 +25,10 @@ class FolderManager
 	$arrayFolder[count($arrayFolder)] = FolderManager::getIncludesFolder();
 	$arrayFolder[count($arrayFolder)] = FolderManager::getClassesFolder();
 	$arrayFolder[count($arrayFolder)] = FolderManager::getGuiFolder();
+	$arrayFolder[count($arrayFolder)] = FolderManager::getModelGuiFolder();
 	$arrayFolder[count($arrayFolder)] = FolderManager::getBaseGuiFolder();
 	$arrayFolder[count($arrayFolder)] = FolderManager::getLogicFolder();
+	$arrayFolder[count($arrayFolder)] = FolderManager::getModelLogicFolder();
 	$arrayFolder[count($arrayFolder)] = FolderManager::getBaseLogicFolder();
 	$arrayFolder[count($arrayFolder)] = FolderManager::getPagesFolder();
 	$arrayFolder[count($arrayFolder)] = FolderManager::getModulesFolder();

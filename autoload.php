@@ -1,5 +1,7 @@
 <?php
 
+ini_set("display_errors", 1); //debug
+
 function __autoload($className)
 {
     Autoload::init();
@@ -20,7 +22,7 @@ class Autoload
 	$s = DIRECTORY_SEPARATOR;
 
 	//enter your cache directory here
-	$mainDirectory = "/opt/lampp/htdocs/applications/git/calopi-framework";
+	$mainDirectory = "/var/www/html/applications/git/calopi-framework";
 
 	Autoload::$CACHE_FILE = $mainDirectory.DIRECTORY_SEPARATOR."cache".DIRECTORY_SEPARATOR."file_include.txt";
 	Autoload::$CLASS_FOLDER = $mainDirectory.DIRECTORY_SEPARATOR."includes";
